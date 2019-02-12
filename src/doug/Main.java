@@ -1,6 +1,7 @@
 package doug;
 
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import fitnesse.ContextConfigurator;
@@ -31,15 +32,35 @@ public class Main {
 		List<WikiPage> pages = suit.getPagesToRun();
 		PagesByTestSystem pagesByTestSystem = new PagesByTestSystem(pages, context.getRootPage());
 		MultipleTestsRunner runner = new MultipleTestsRunner(pagesByTestSystem, context.testSystemFactory);
-		runner.addTestSystemListener(new Listener());
+		Listener listener = new Listener();
+		runner.addTestSystemListener(listener);
 		runner.executeTestPages();
+		List<FitnesseScenario> scenaries = listener.getScenaries();
+		List<Pair> pairs = Pairs.from(scenaries);
+		for (Pair pair : pairs) {
+			System.out.printf("%s	%s	%s	%s	%s	%s	%s\n", pair.getScenarioA().getFullPath(),
+					pair.getScenarioB().getFullPath(), pair.getUniform().getRelativeUniformity().getUniformity(),
+					pair.getUniform().getUniformIntputs(), pair.getUniform().getNonUniforInputs(),
+					pair.getUniform().getUniformOutputs(), pair.getUniform().getNonUniformOutputs());
+		}
 
 	}
 
 	static class Listener implements TestSystemListener {
+		private List<FitnesseScenario> scenaries;
+		private FitnesseScenario current;
+
+		public Listener() {
+			scenaries = new ArrayList<>();
+		}
+
+		public List<FitnesseScenario> getScenaries() {
+			return scenaries;
+		}
 
 		@Override
 		public void testSystemStarted(TestSystem testSystem) {
+
 		}
 
 		@Override
@@ -48,7 +69,8 @@ public class Main {
 
 		@Override
 		public void testStarted(TestPage testPage) {
-			System.out.println("<<<Scenario>>>"+testPage.getFullPath());
+			current = new FitnesseScenario(testPage.getFullPath());
+			scenaries.add(current);
 		}
 
 		@Override
@@ -73,29 +95,30 @@ public class Main {
 			SlimAssertion anAssertion = (SlimAssertion) assertion;
 			SlimExpectation expectation = anAssertion.getExpectation();
 			if (expectation instanceof fitnesse.testsystems.slim.tables.SlimTable.VoidReturnExpectation) {
-				System.out.println("<<<INPUT>>>" + expectation.getEsperado());
+				current.addOutput(expectation.getEsperado());
 			} else if (expectation instanceof fitnesse.testsystems.slim.tables.SlimTable.ReturnedValueExpectation) {
-				System.out.println("<<<OUTPUT>>>" + expectation.getEsperado());
+				current.addOutput(expectation.getEsperado());
 			} else if (isFixture(anAssertion)) {
-
 			} else if (expectation instanceof fitnesse.testsystems.slim.tables.ScriptTable.ArgumentExpectation) {
-				System.out.println("<<<INPUT>>>" + expectation.getEsperado());
+				current.addInput(expectation.getEsperado());
 			} else if (expectation instanceof fitnesse.testsystems.slim.tables.ScriptTable.ScriptActionExpectation) {
-				printArgs(anAssertion, "<<<INPUT>>>");
+				printArgs(anAssertion);
 			} else if (expectation instanceof fitnesse.testsystems.slim.tables.ScriptTable.EnsureActionExpectation) {
-				printArgs(anAssertion, "<<<OUTPUT>>>");
+				for (Object object : anAssertion.getArgs()) {
+					current.addOutput(object.toString());
+				}
 			} else if (expectation instanceof fitnesse.testsystems.slim.tables.ScriptTable.RejectActionExpectation) {
-				printArgs(anAssertion, "<<<INPUT>>>");
+				printArgs(anAssertion);
 			} else if (expectation instanceof fitnesse.testsystems.slim.tables.QueryTable.QueryTableExpectation) {
-				fitnesse.testsystems.slim.tables.QueryTable.QueryTableExpectation query = (fitnesse.testsystems.slim.tables.QueryTable.QueryTableExpectation) expectation;
 			} else {
 				System.out.println(expectation.getEsperado() + anAssertion);
 			}
 		}
 
-		private void printArgs(SlimAssertion anAssertion, String type) {
-			for (Object object : anAssertion.getArgs())
-				System.out.println(type + object);
+		private void printArgs(SlimAssertion anAssertion) {
+			for (Object object : anAssertion.getArgs()) {
+				current.addInput(object.toString());
+			}
 		}
 
 		private boolean isFixture(SlimAssertion anAssertion) {
