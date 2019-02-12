@@ -1,0 +1,6 @@
+!|scenario| the player smells the | object | in cavern | cavern | when moving | direction | from cavern | startingLocation | 
+|freeze wumpus|
+|put| @object | in cavern | @cavern |
+|put| player | in cavern | @startingLocation |
+|enter command | @direction |
+|ensure| message was printed | ${MESSAGE} |

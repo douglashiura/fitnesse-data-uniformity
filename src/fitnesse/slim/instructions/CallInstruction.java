@@ -70,4 +70,8 @@ public class CallInstruction extends Instruction {
     result = 31 * result + Arrays.hashCode(args);
     return result;
   }
+
+public Object[] getArgs() {
+	return args == null ? new Object[0]: args;
+}
 }

@@ -147,8 +147,8 @@ public class WikiContentUpdater implements Updater {
     InputStream in = null;
     try {
       in = ClassLoader.getSystemResourceAsStream(resourceName);
-      String content = FileUtil.toString(in);
-      return content.split("\n");
+//      String content = FileUtil.toString(in);
+      return /*content*/"".split("\n");
     } finally {
       FileUtil.close(in);
     }

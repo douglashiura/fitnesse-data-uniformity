@@ -32,7 +32,7 @@ public class ImportTable extends SlimTable {
       String importString = table.getCellContents(0, row);
       if (!importString.isEmpty()) {
         Instruction importInstruction = new ImportInstruction(makeInstructionTag(), importString);
-        instructions.add(makeAssertion(importInstruction, new ImportExpectation(0, row)));
+        instructions.add(makeAssertion(importInstruction, new ImportExpectation(0, row, table, testContext)));
       }
     }
     return instructions;
@@ -40,8 +40,8 @@ public class ImportTable extends SlimTable {
 
   public class ImportExpectation extends RowExpectation {
 
-    public ImportExpectation(int col, int row) {
-      super(col, row);
+    public ImportExpectation(int col, int row, Table table, SlimTestContext testContext) {
+      super(col, row, table, testContext);
     }
 
     @Override

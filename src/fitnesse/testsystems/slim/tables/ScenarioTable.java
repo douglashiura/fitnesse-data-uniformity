@@ -273,11 +273,11 @@ public class ScenarioTable extends SlimTable {
   }
 //// till here
 
-  private final class ScenarioExpectation extends RowExpectation {
+  public final class ScenarioExpectation extends RowExpectation {
     private ScriptTable scriptTable;
 
     private ScenarioExpectation(ScriptTable scriptTable, int row) {
-      super(-1, row); // We don't care about anything but the row.
+      super(-1, row, table, testContext); // We don't care about anything but the row.
       this.scriptTable = scriptTable;
     }
 

@@ -1,0 +1,4 @@
+!|Import|
+|HuntTheWumpusDotNet.fixtures|
+
+!|script|HuntTheWumpusDotNet.fixtures.GameDriver|

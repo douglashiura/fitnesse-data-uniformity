@@ -47,7 +47,7 @@ public class HtmlSlimTestSystem extends SlimTestSystem {
       String html = createHtmlResults(START_OF_TEST, END_OF_TEST);
       testOutputChunk(html);
     } else {
-      for (int index = 0; index < allTables.size(); index++) {
+      for (int index = 0; index < allTables.size(); index++) {    	  
         SlimTable theTable = allTables.get(index);
         SlimTable startWithTable = (index == 0) ? START_OF_TEST : theTable;
         SlimTable nextTable = (index + 1 < allTables.size()) ? allTables.get(index + 1) : END_OF_TEST;
@@ -69,7 +69,7 @@ public class HtmlSlimTestSystem extends SlimTestSystem {
   private List<SlimTable> createSlimTables(TestPage pageToTest) {
     NodeList nodeList = makeNodeList(pageToTest);
     tableScanner = new HtmlTableScanner(nodeList);
-    return createSlimTables(tableScanner);
+    return createSlimTables(tableScanner) ;
   }
 
   private NodeList makeNodeList(TestPage pageToTest) {

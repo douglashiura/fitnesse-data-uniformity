@@ -1,0 +1,15 @@
+If the player tries to move out of the map, the game should say: ''"You can't go {} from here."''; where {} is the direction.
+
+!include DonutMap
+
+!|script|
+|put|player|in cavern|1|
+|reject|enter command|W|
+|ensure|message was printed|You can't go west from here.|
+|reject|enter command|N|
+|ensure|message was printed|You can't go north from here.|
+|put|player|in cavern|5|
+|reject|enter command|E|
+|ensure|message was printed|You can't go east from here.|
+|reject|enter command|S|
+|ensure|message was printed|You can't go south from here.|

@@ -221,7 +221,7 @@ public class DecisionTable extends SlimTable {
 
       if (assignedSymbol != null) {
         assertion = makeAssertion(callAndAssign(assignedSymbol, getTableName(), functionName, args),
-                new SymbolAssignmentExpectation(assignedSymbol, col, row));
+                new SymbolAssignmentExpectation(assignedSymbol, col, row, table, testContext));
       } else {
          assertion = makeAssertion(callFunction(getTableName(), functionName, args),
                 new ReturnedValueExpectation(col, row, getDTCellContents(col, row)));
@@ -247,7 +247,7 @@ public class DecisionTable extends SlimTable {
 
         Instruction setInstruction = callFunction(getTableName(), var, args);
         assertions.add(makeAssertion(setInstruction,
-                new VoidReturnExpectation(col, row)));
+                new VoidReturnExpectation(col, row, table, testContext)));
       }
       return assertions;
     }

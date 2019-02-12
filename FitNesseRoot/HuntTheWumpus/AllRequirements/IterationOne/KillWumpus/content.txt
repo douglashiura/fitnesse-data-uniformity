@@ -1,0 +1,21 @@
+If the player shoots an arrow through a cavern that contains the Wumpus, the wumpus dies, and the game is over.  
+
+!include CrossMap
+
+
+!3 Verify you can hit or miss the wumpus, and the game ends appropriately
+|Player Shoots Wumpus With Arrow Ending Game    |
+|wumpus cavern|player cavern|direction|game over|
+|3            |1            |east     |true     |
+|3            |5            |west     |true     |
+|3            |9            |north    |true     |
+|3            |6            |south    |true     |
+|3            |2            |west     |false    |
+|3            |4            |east     |false    |
+|3            |8            |south    |false    |
+
+!3 Check the messages when you win the game 
+|script                                                                     |
+|Player Shoots|1                  |Wumpus|3|With Arrow|east|Ending Game|true|
+|ensure       |message was printed|You have killed the Wumpus.              |
+|ensure       |message was printed|Game over.                               |

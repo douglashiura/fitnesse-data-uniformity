@@ -1,0 +1,36 @@
+At the beginning of each turn the game reports the directions that the player can go in. Directions are listed in the order of north, south, east, west.
+
+!include DonutMap
+!| script |
+| put | player | in cavern | 1 |
+| enter command | Rest |
+| ensure| message was printed | You can go east and south from here. | 
+
+!| script |
+| enter command | East |
+| ensure| message was printed | You can go west and east from here. |
+
+!| script |
+| enter command | East |
+| ensure| message was printed | You can go west and south from here. |
+
+!| script |
+| enter command | South |
+| ensure| message was printed | You can go north and south from here. |
+
+!| script |
+| enter command | South |
+| ensure| message was printed | You can go north and west from here. |
+
+!| script |
+| enter command | West |
+| ensure| message was printed | You can go east and west from here. |
+
+!| script |
+| enter command | West |
+| ensure| message was printed | You can go east and north from here. |
+
+!| script |
+| enter command | North |
+| ensure| message was printed | You can go south and north from here. |
+

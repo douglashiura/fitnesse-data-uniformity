@@ -1,0 +1,6 @@
+^NavigatePlayer
+^SmellWumpus
+^ArrowS
+^KillWumpus
+^WumpusMovesRandomly
+

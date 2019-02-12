@@ -60,6 +60,12 @@ public class TableTable extends SlimTable {
       getTestContext().incrementErroredTestsCount();
       return exceptionResult;
     }
+
+	@Override
+	public String getEsperado() {
+		// TODO Auto-generated method stub
+		return null;
+	}
   }
 
   @SuppressWarnings("unchecked")
@@ -102,7 +108,7 @@ public class TableTable extends SlimTable {
       int tableRow = resultRow + 1;
       String contents = table.getCellContents(col, tableRow);
       String result = (String) rowList.get(col);
-      SlimTestResult testResult = getTestResult(result, replaceSymbolsWithFullExpansion(contents));
+      SlimTestResult testResult = getTestResult(result, replaceSymbolsWithFullExpansion(contents, table, testContext));
       table.updateContent(col, tableRow, testResult);
       testSummary.add(testResult.getExecutionResult());
     }
