@@ -1,0 +1,13 @@
+!contents -R2 -g -p -f -h
+
+!2 Testing that rooms can only be built orthogonally adjacent to other rooms as per requirement 7
+
+!***< Hidden
+!path bin
+*!
+
+| !-fixtures.MyFixture-! |
+| farmX | farmY               | playerBuildRoom() |
+| 3     |      7              |  e                |
+| 1     |      1              |  w                |
+

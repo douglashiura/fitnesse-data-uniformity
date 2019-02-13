@@ -1,0 +1,31 @@
+!contents -R2 -g -p -f -h
+
+!2 Test that  players with cooking hearths can convert animals and other resources to food.
+
+!***< Hidden
+!path bin
+*!
+
+| !-fixtures.MyFixture-! |
+|sheep| cookSheepWithHearth() |
+|  3   |       4              |
+
+
+| !-fixtures.MyFixture-! |
+|boar| cookBoarWithHearth() |
+|  3   |       6              |
+
+
+| !-fixtures.MyFixture-! |
+|cattle| cookCattleWithHearth() |
+|  3   |       8              |
+
+
+| !-fixtures.MyFixture-! |
+|grain| cookGrainWithHearth() |
+|  3   |       9              |
+
+
+| !-fixtures.MyFixture-! |
+|vege| cookVegeWithHearth() |
+|  3   |       9              |

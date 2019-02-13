@@ -1,0 +1,35 @@
+!contents -R2 -g -p -f -h
+
+!***< Hidden
+!path bin
+*!
+
+!2 Testing that the right price is paid for building rooms of wood, clay or stone as well as stables and fences.
+
+| !-fixtures.MyFixture-! |
+| woodBefore | reedBefore | woodOrReed | buildWoodRoomCheckCost() |
+|  7         |   4        |    false   |        2                 |
+|  6         |   4        |    true    |        1                 |
+
+
+| !-fixtures.MyFixture-! |
+| clayBefore | reedBefore | clayOrReed | buildClayRoomCheckCost() |
+|  7         |   4        |    false   |        2                 |
+|  6         |   4        |    true    |        1                 |
+
+
+| !-fixtures.MyFixture-! |
+| stoneBefore | reedBefore | stoneOrReed | buildStoneRoomCheckCost()|
+|  7          |   4        |    false    |        2                 |
+|  6          |   4        |    true     |        1                 |
+
+| !-fixtures.MyFixture-! |
+| woodBefore   | buildFenceCheckCost()|
+|  7           |        3             |
+|  6           |        2             |
+
+| !-fixtures.MyFixture-! |
+| woodBefore  | whichOption | buildStableCheckCost()|
+|  7          | false       |     6             |
+|  6          | true        |     4             |
+

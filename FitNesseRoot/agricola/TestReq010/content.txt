@@ -1,0 +1,12 @@
+!contents -R2 -g -p -f -h
+
+!***< Hidden
+!path bin
+*!
+
+!2 Test to ensure that fields can only be built orthogonaly adjacent to other pastures.
+
+| !-fixtures.MyFixture-!  |
+| farmX | farmY | orthAdj| playerBuildField() |
+|  3    |  5    | false  |          e            |
+|  3    |  5    | true   |          f            |

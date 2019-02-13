@@ -76,6 +76,8 @@ public class FitServer {
         try {
           print("processing document of size: " + size + "\n");
           String document = FitProtocol.readDocument(socketReader, size);
+          System.out.println("FitServer.process()");
+          System.out.println(document);
           //TODO MDM if the page name was always the first line of the body, it could be printed here.
           Parse tables = new Parse(document);
           newFixture().doTables(tables);

@@ -1,0 +1,12 @@
+!contents -R2 -g -p -f -h
+
+
+!2 Test that having a joinery allows a player to convert 1 wood to 2 food.
+
+!***< Hidden
+!path bin
+*!
+
+| !-fixtures.MyFixture-! |
+|foodBefore | joineryConvertwoodToFood() |
+|     6      |       2                    |

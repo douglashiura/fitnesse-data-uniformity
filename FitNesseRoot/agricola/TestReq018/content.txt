@@ -1,0 +1,19 @@
+!contents -R2 -g -p -f -h
+
+!***< Hidden
+!path bin
+*!
+
+!2 Test to check that a player with a fireplace can convert animals to a respective amount of food
+
+| !-fixtures.MyFixture-! |
+|foodBefore| animalCount | cookSheepWithFireplace() |
+|    0     |      4      |    6               |
+
+| !-fixtures.MyFixture-! |
+|foodBefore| animalCount | cookBoarWithFireplace() |
+|    0     |     6       |        10              |
+
+| !-fixtures.MyFixture-! |
+|foodBefore|animalCount  | cookCattleWithFireplace() |
+|    0     |    7       |        18                |

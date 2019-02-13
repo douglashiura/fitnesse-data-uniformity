@@ -1,0 +1,22 @@
+!contents -R2 -g -p -f -h
+
+!2 Testing that at harvest in a multiplayer game, the players pay 2 food per family member as per requirement 6
+
+!***< Hidden
+!path bin
+*!
+
+| !-fixtures.MyFixture-! |
+| playerIndex |playerFoodBeforeHarvest| playerFamilyMembers | playersEatFoodAtHarvestMultiplayer() |
+| 2           |10                     |      2              |  6                                    |
+| 3           |20                     |      4              |  12                                   |
+
+
+!2 Testing that at harvest in a multiplayer game, the players pay 2 food or gets beggar cards for each missing food per family member as per requirement 6
+
+Here we are missing two food so the score should go from 0 to -2.
+
+| !-fixtures.MyFixture-! |
+| playerIndex   | playerFoodBeforeHarvest| playerFamilyMembers | playerScoreDeductByBeggingMultiplayer() |
+| 4             |  2                      |      2              |  -2                          |
+| 1             |  0                      |      3              |  -6                          |

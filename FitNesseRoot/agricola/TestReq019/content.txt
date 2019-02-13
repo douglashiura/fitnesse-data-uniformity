@@ -1,0 +1,17 @@
+!contents -R2 -g -p -f -h
+
+!2 Test that cooking hearths have the right price paid for each of them.
+
+!***< Hidden
+!path bin
+*!
+
+| !- fixtures.MyFixture -! |
+|clayBefore| playerIndex | getPlayersClayAfterBuildingHearth() |
+| 10       |  0          |    6                                |
+| 10       |  1          |    5                                |
+
+
+| !- fixtures.MyFixture -! |
+| getPlayersFireplaceAfterBuildingHearth() |
+|    false                                 |

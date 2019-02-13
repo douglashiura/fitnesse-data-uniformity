@@ -1,0 +1,12 @@
+!contents -R2 -g -p -f -h
+
+!***< Hidden
+!path bin
+*!
+
+!2 Test to ensure that the right price is paid for the basketmakers workshop.
+
+| !-fixtures.MyFixture-! |
+|  playerReedBeforeBasket| playerStoneBeforeBasket| reedOrStone| playerBuildBasketmakersWorkshop() |
+|  2                      |       2                 |        false|            0         |
+|  3                      |       3                 |        true |            1         |

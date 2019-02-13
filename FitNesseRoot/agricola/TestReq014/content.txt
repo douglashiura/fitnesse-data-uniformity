@@ -1,0 +1,13 @@
+!contents -R2 -g -p -f -h
+
+!***< Hidden
+!path bin
+*!
+
+!2 Test to ensure that no more than 4 stables can be built
+
+!2 always press "build stable" then Done action
+
+| !-fixtures.MyFixture-!  |
+| farmX | farmY | playerBuilFiveStables() |
+|  3    |  5    |         4               |

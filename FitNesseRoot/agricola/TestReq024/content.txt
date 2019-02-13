@@ -1,0 +1,12 @@
+!contents -R2 -g -p -f -h
+
+!2 Test to check that players with a stoneoven can convert grain to food.
+
+!***< Hidden
+!path bin
+*!
+
+| !-fixtures.MyFixture-! |
+| grainBefore | foodBefore | bakeBreadWithStoneOven() |
+|  2          |  0         |   8                   |
+|  1          |  0         |   4                   |

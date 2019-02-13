@@ -1,0 +1,24 @@
+!contents -R2 -g -p -f -h
+
+!2 Testing the family member count of each player as per requirement 2
+
+!***< Hidden
+!path bin
+*!
+
+| !-fixtures.MyFixture-! |
+| playerIndex | playersFamilyMembersCount() |
+| 0           | 2                          |
+| 1           | 2                          |
+| 2           | 2                          |
+| 3           | 2                          |
+| 4           | 2                          |
+
+
+| !-fixtures.MyFixture-! |
+| playerIndex | playersRoomCount() |
+| 0           | 2                          |
+| 1           | 2                          |
+| 2           | 2                          |
+| 3           | 2                          |
+| 4           | 2                          |

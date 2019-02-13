@@ -1,0 +1,13 @@
+!contents -R2 -g -p -f -h
+!2 Check if having a well adds 1 food every turn after having purchased it.
+
+
+!***< Hidden
+!path bin
+*!
+
+
+| !-fixtures.MyFixture-! |
+| foodBefore | iterateTurns | checkIfWellBringsFood() |
+|   0        |    2         |       2                 |
+|   0        |    5         |       5                 |

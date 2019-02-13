@@ -27,7 +27,7 @@ public class Main {
 		SuiteResponder suit = new SuiteResponder();
 		FitNesseContext context = ContextConfigurator.systemDefaults().makeFitNesseContext();
 		Request request = new Request(new ByteArrayInputStream("".getBytes()));
-		request.setResource("HuntTheWumpus.AllRequirements");
+		request.setResource(".agricola");
 		suit.makeResponse(context, request);
 		List<WikiPage> pages = suit.getPagesToRun();
 		PagesByTestSystem pagesByTestSystem = new PagesByTestSystem(pages, context.getRootPage());
@@ -35,6 +35,7 @@ public class Main {
 		Listener listener = new Listener();
 		runner.addTestSystemListener(listener);
 		runner.executeTestPages();
+		
 		List<FitnesseScenario> scenaries = listener.getScenaries();
 		List<Pair> pairs = Pairs.from(scenaries);
 		for (Pair pair : pairs) {

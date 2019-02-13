@@ -1,0 +1,13 @@
+!contents -R2 -g -p -f -h
+
+
+!***< Hidden
+!path bin
+*!
+
+!2 Test to ensure that the right price is paid for the pottery.
+
+| !-fixtures.MyFixture-! |
+|  playerClayBeforePottery| playerStoneBeforePottery| clayOrStone | playerBuildPottery() |
+|  2                      |       2                 |        false|            0         |
+|  3                      |       3                 |        true |            1         |

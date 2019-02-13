@@ -1,0 +1,13 @@
+!contents -R2 -g -p -f -h
+
+
+!***< Hidden
+!path bin
+*!
+
+!2 Test to ensure that the right price is paid for the well.
+
+| !-fixtures.MyFixture-! |
+|  playerWoodBeforeWell| playerStoneBeforeWell| woodOrStone| playerBuildWell() |
+|  2                      |       5                 |        false|            2         |
+|  3                      |       3                 |        true |            2         |

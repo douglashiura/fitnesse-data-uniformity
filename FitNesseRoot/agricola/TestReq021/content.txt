@@ -1,0 +1,12 @@
+!contents -R2 -g -p -f -h
+
+!***< Hidden
+!path bin
+*!
+
+!2 Test to ensure that the right price is paid for clay oven.
+
+| !-fixtures.MyFixture-! |
+|  playerClayBeforeOven| playerStoneBeforeOven | clayOrStone | playerBuildClayOven() |
+|  3                   |       1               |        true |            0          |
+|  3                   |       2               |        false|            1          |

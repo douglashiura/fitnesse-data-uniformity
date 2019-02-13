@@ -1,0 +1,11 @@
+!contents -R2 -g -p -f -h
+
+!2 Test to check that players with a clay oven can convert grain to food.
+
+!***< Hidden
+!path bin
+*!
+
+| !-fixtures.MyFixture-! |
+| grainBefore | foodBefore | bakeBreadWithClayOven() |
+|  1          |  0         |   5                   |

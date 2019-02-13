@@ -1,0 +1,9 @@
+| script | echo fixture |
+| $val= |  echo | myVal |
+
+|Hash table Fixture                   |
+|field1 |field2                 | map? |
+|$val|!{key:value,key2:$val}| {foo=bar} |
+
+|script     |hash table fixture           |
+|script test|!{key:value,key2:$val}|

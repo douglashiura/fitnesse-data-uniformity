@@ -1,0 +1,15 @@
+!contents -R2 -g -p -f -h
+
+!2 Testing the food count of each player as per requirement 1
+
+!***< Hidden
+!path bin
+*!
+
+| !-fixtures.MyFixture-! |
+| playerIndex | playersFoodMultiplayerGame() |
+| 0           | 2                          |
+| 1           | 3                          |
+| 2           | 3                          |
+| 3           | 3                          |
+| 4           | 3                          |

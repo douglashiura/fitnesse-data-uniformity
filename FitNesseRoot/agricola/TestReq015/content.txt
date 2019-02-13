@@ -1,0 +1,11 @@
+!contents -R2 -g -p -f -h
+
+!***< Hidden
+!path bin
+*!
+
+!2 Test to ensure that no more than 15 fences can be built
+
+| !-fixtures.MyFixture-!  |
+| playerBuilSixteenFences() |
+|         15                |

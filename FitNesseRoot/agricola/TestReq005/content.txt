@@ -1,0 +1,24 @@
+!contents -R2 -g -p -f -h
+
+
+!***< Hidden
+!path bin
+*!
+
+!2 Test that in a multiplayer game, the wood gets replenished as per requirement 5
+
+| !-fixtures.MyFixture-! |
+| numplayers | multiplayerWoodReplenishment() |
+|  2         |    6   |
+|  3         |    6   |
+|  4         |    6   |
+|  5         |    6   |
+
+!2 test the same thing as above but this time a player takes wood.
+
+| !-fixtures.MyFixture-! |
+| numplayers | playerTakesWood | multiplayerWoodReplenishmentAndTakeWood() |
+|  2         | true |   3   |
+|  3         | true |   3   |
+|  4         | true |   3   |
+|  5         | true |   3   |

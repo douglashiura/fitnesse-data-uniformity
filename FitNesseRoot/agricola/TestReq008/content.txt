@@ -1,0 +1,21 @@
+!contents -R2 -g -p -f -h
+
+!2 Testing that if a player has two or more of a specific animal at harvest, a new creature of that type will be added.
+
+!***< Hidden
+!path bin
+*!
+
+!2 Test Cattle
+
+The animal types go as follows: 0 is sheep, 1 is wild boar and 2 is cattle
+
+| !-fixtures.MyFixture-! |
+| animalsBeforeHarvest | animalType | animalsAfterHarvest() |
+| 2                    |     0      | 3                |
+| 3                    |     1      | 4                |
+| 4                    |     2      | 5                |
+| 2                    |     2      | 3                |
+| 3                    |     1      | 4                |
+| 4                    |     0      | 5                |
+| 1                    |     0      | 1                |

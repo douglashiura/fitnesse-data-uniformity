@@ -1,0 +1,13 @@
+!contents -R2 -g -p -f -h
+
+
+!***< Hidden
+!path bin
+*!
+
+!2 Test to ensure that the right price is paid for the joinery.
+
+| !-fixtures.MyFixture-! |
+|  playerWoodBeforeJoinery| playerStoneBeforeJoinery| woodOrStone | playerBuildJoinery() |
+|  2                      |       2                 |        false|            0         |
+|  3                      |       3                 |        true |            1         |
