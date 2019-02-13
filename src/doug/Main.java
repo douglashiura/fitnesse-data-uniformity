@@ -35,7 +35,7 @@ public class Main {
 		Listener listener = new Listener();
 		runner.addTestSystemListener(listener);
 		runner.executeTestPages();
-		
+
 		List<FitnesseScenario> scenaries = listener.getScenaries();
 		List<Pair> pairs = Pairs.from(scenaries);
 		for (Pair pair : pairs) {
