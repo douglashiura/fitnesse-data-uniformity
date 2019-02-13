@@ -17,3 +17,4 @@
  * Update ${automated.testing.home}/configs/users.properties and add a line for the above username (e.g. test.user=password)
 
 !contents -R2 -g -p -f -h
+!define TEST_SYSTEM {slim}

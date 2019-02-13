@@ -1,0 +1,6 @@
+!contents -R2 -g -p -f -h
+
+!2 ''Classpaths''
+!path ./target/lib/*
+!path ./target/*
+!define TEST_SYSTEM {slim}

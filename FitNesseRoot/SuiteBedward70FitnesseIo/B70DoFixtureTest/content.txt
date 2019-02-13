@@ -1,0 +1,21 @@
+|Import|
+|ru.bedward70.fitnesse.io.test|
+
+INT Example
+
+|!-B70DoFixtureTest-!|
+|show|calculate hash code|Hello|
+|check|calculate hash code|Hello|69609650|
+|saveSymbol|calculate hash code|Hello|$hash-code|
+
+Read $hash-code symbol
+
+|!-B70DoFixtureTest-!|
+|check|read|=$hash-code|69609650|
+|show|read|=$hash-code|
+
+Read result of getHelloWorld() method
+
+|!-B70DoFixtureTest-!|1|=$hash-code|3|
+|show|read|getHelloWorld()|
+|check|read|getHelloWorld()|Hello, World!|
