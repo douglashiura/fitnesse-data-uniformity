@@ -1,0 +1,16 @@
+!contents -R2 -g -p -f -h
+!define TEST_SYSTEM {slim}
+
+!path target\classes
+!path target\classes\**.jar
+!path target\maven-archiver
+!path target\maven-status
+!path lib\**.jar
+
+|import     |
+|fixtures   |
+|pageobjects|
+
+|fixtures.SelectItem                 |
+|openSelectable|selectAll|isSelected?|
+|dummy         |dummy    |true       |
