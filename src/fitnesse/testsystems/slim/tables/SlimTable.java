@@ -410,7 +410,7 @@ public abstract class SlimTable {
 		}
 	}
 
-	class SymbolAssignmentExpectation extends RowExpectation {
+	public class SymbolAssignmentExpectation extends RowExpectation {
 		private String symbolName;
 
 		SymbolAssignmentExpectation(String symbolName, int col, int row, Table table, SlimTestContext testContext) {

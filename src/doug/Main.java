@@ -27,7 +27,7 @@ public class Main {
 		SuiteResponder suit = new SuiteResponder();
 		FitNesseContext context = ContextConfigurator.systemDefaults().makeFitNesseContext();
 		Request request = new Request(new ByteArrayInputStream("".getBytes()));
-		request.setResource(".demoQASuite");
+		request.setResource(".ExTest");
 		suit.makeResponse(context, request);
 		List<WikiPage> pages = suit.getPagesToRun();
 		PagesByTestSystem pagesByTestSystem = new PagesByTestSystem(pages, context.getRootPage());
@@ -111,7 +111,15 @@ public class Main {
 			} else if (expectation instanceof fitnesse.testsystems.slim.tables.ScriptTable.RejectActionExpectation) {
 				printArgs(anAssertion);
 			} else if (expectation instanceof fitnesse.testsystems.slim.tables.QueryTable.QueryTableExpectation) {
-			} else {
+			} else if (expectation instanceof fitnesse.testsystems.slim.tables.TableTable.TableTableExpectation) {
+				for (Object object : anAssertion.getArgs()) {
+					current.addOutput(object.toString());
+				}
+			} else if (expectation instanceof fitnesse.testsystems.slim.tables.SlimTable.SymbolAssignmentExpectation) {
+				current.addOutput(expectation.getEsperado());
+			}
+
+			else {
 				System.out.println(expectation.getEsperado() + anAssertion);
 			}
 		}
