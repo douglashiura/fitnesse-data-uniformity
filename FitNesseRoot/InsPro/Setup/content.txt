@@ -1,0 +1,26 @@
+!define COLLAPSE_SETUP {true} 
+!define COLLAPSE_TEARDOWN {true} 
+
+|Import|
+|com.pennassurancesoftware.fitnesse.inspro|
+|fitnesse.testutil|
+|fitnesse.slim.test|
+|fitnesse.fixtures|
+
+| Define Table Type                         |
+| Constant                     | as Table   |
+| Data                         | as Table   |
+| !-InsProEnvironment-!        | as Table   |
+| Annuity New Business         | as Table   |
+| Universal Life New Business  | as Table   |
+
+| Constant |
+| SCREENSHOTS_PATH | ${FITNESSE_ROOTPATH}/FitNesseRoot/files/testResults/screenshots |
+
+| !-InsProEnvironment-! |
+| INSPRO_HOST     | ${inspro.host}  |
+| INSPRO_PORT     | ${inspro.port}  |
+| INSPRO_HEADLESS | ${pas.headless} |
+
+| Data | CLEAR | 
+|      |       |

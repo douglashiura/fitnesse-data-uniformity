@@ -1,0 +1,59 @@
+!1 Royal Neighbors of America: Test B
+Sys Gain WD
+
+!******** Annuity
+-!| Data                    | Annuity              |
+| Client                    | RNA0000001           |
+| Marketing File            | RNAMY-100            |
+| Application Received Date | 01/12/2013           |
+| Sign Date                 | 01/12/2013           |
+| Effective Date            | 05/01/2013           |
+| Tax Plan Type             | NQ                   |
+| Tax Plan Sub Type         | N/A                  |
+| Initial Annuity Period    | 5                    |
+**************!
+!********> Owner
+-!| Data                    | Owner                |
+| Person Type               | I                    |
+| First Name                | Nonq                |
+| Last Name                 | !-OwnerB-!           |
+| Address Line 1            | 1 Main St            |
+| Zip                       | 33742                |
+| Gender                    | M                    |
+| Marital Staus             | M                    |
+| SSN                       | 111223333            |
+| Birth Date                | 01/01/1960           |
+**************!
+!********> Beneficiary
+-!| Data                    | Beneficiary          |
+| Persone Type              | I                    |
+| First Name                | Nonqbene             |
+| Last Name                 | !-BeneB-!            |
+| Address Line 1            | 1 Main St            |
+| Zip                       | 33742                |
+| Priority                  | Primary              |
+| Relationship              | Wife                 |
+| Share Type                | Total Proceeds       |
+**************!
+!********> Initial Payment
+-!| Data                    | Initial Payment      |
+| Sub Type                  | NONQ                 |
+| Effective Date            | 05/01/2013           |
+| Cash Amount               | $500,000             |
+| Cash Received Date        | 05/01/2013           |
+**************!
+!********> Service Program
+-!| Data                    | Service Program       |
+| Type                      | Systematic Withdrawal |
+| Sub Type                  | Gain                  |
+| Withdrawal Frequency      | Quarterly             |
+| Penalty Waiver Reason     | None                  |
+| Effective Date            | 05/01/2013            |
+| Start Date                | 08/01/2013            |
+| Termination Date          | 08/02/2014            |
+**************!
+!********> Results
+-!| Annuity New Business |
+| Policy Number             |                      |
+| Policy Status             |                      |
+**************!

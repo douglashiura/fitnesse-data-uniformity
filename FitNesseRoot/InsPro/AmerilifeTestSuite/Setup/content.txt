@@ -1,0 +1,5 @@
+!include <InsPro.SetUp
+
+| Constant |
+| INSPRO_USER | jcimorel  |
+| INSPRO_PASS | jc123456  |

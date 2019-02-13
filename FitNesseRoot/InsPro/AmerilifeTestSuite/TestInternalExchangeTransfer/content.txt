@@ -1,0 +1,13 @@
+!1 Testing Internal Exchange Transfer
+This demonstrates adding a new policy with an internal exchange transfer payment.
+
+|Annuity New Business                    |
+| Client                    | RNA0000001 |
+| Marketing File            | RNART-100  |
+| Application Received Date | SYSTEM     |
+| Sign Date                 | SYSTEM     |
+| Tax Plan Type             | 01         |
+| Tax Plan Sub Type         | 5          |
+| Exchange Transfer         | Internal   | Possible Values: None, Internal, External |
+| Initial Premium           | $10,000    |
+| Policy Number             |            |

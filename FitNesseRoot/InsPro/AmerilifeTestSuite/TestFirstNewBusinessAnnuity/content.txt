@@ -1,0 +1,14 @@
+!1 First Annuity Test Case In !-InsPro-!!!!
+This is a new business policy with $10,000 initial premium.  I expect to see this policy
+go active in the cycle after adding it through the UI.
+
+|Annuity New Business                    |
+| Client                    | RNA0000001 |
+| Marketing File            | RNART-100  |
+| Application Received Date | SYSTEM     |
+| Sign Date                 | SYSTEM     |
+| Tax Plan Type             | 01         |
+| Tax Plan Sub Type         | 5          |
+| Exchange Transfer         | N/A        |
+| Initial Premium           | $10,000    |
+| Policy Number             |            |

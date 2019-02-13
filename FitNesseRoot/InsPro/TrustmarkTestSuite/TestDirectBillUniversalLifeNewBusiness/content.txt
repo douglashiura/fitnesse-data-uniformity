@@ -1,0 +1,16 @@
+!1 Testing Direct Billing (Universal Life New Business)
+Instead of "hard coding" dates into the page I'm using expressions for the dates around the current system date.
+
+|Universal Life New Business                    |
+| Client                    | TESTUL0001        |
+| Marketing File            | X0000-002         |
+| Date Of Birth             | SYSTEM - 25 Years |
+| Effective Date            | SYSTEM - 2 Days   |
+| Face Amount               | $25,000           |
+| Application Received Date | SYSTEM            |
+| Sign Date                 | SYSTEM            |
+| Hire Date                 | SYSTEM - 60 Days  |
+| Eligibility Date          | Hire Date         |
+| Status Date               | Hire Date         |
+| Billing Method            | D                 |
+| Policy Number             |                   |

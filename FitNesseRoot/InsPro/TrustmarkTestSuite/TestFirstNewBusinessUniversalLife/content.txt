@@ -1,0 +1,13 @@
+!1 First Universal Life Test Case In !-InsPro-!!!!
+This is a new business policy with $350 cash with application.  I expect to see this policy
+go active in the cycle after adding it through the UI.
+
+|Universal Life New Business             |
+| Client                    | TESTUL0001 |
+| Marketing File            | X0000-002  |
+| Date Of Birth             | 1991-11-11 |
+| Face Amount               | $25,000    |
+| Application Received Date | SYSTEM     |
+| Sign Date                 | SYSTEM     |
+| Cash With App             | $350       |
+| Policy Number             |            |

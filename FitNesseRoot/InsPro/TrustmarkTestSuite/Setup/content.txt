@@ -1,0 +1,5 @@
+!include <InsPro.SetUp
+
+| Constant |
+| INSPRO_USER | bdashkiw  |
+| INSPRO_PASS | bd123456  |

@@ -1,0 +1,63 @@
+!1 Royal Neighbors of America: Test I
+Roth - CWA + small T/E
+
+!******** Annuity
+-!| Data                    | Annuity              |
+| Client                    | RNA0000001           |
+| Marketing File            | RNAMY-100            |
+| Application Received Date | 10/15/2013           |
+| Sign Date                 | 10/15/2013           |
+| Effective Date            | 10/15/2013           |
+| Roth Origination Date     | 10/15/2012           |
+| Tax Plan Type             | Roth                 |
+| Tax Plan Sub Type         | N/A                  |
+| Initial Annuity Period    | 5                    |
+**************!
+!********> Owner
+-!| Data                    | Owner                |
+| Person Type               | I                    |
+| First Name                | Qual                 |
+| Last Name                 | !-OwnerI-!           |
+| Address Line 1            | 1 Main St            |
+| Zip                       | 20500                |
+| Gender                    | M                    |
+| Marital Staus             | M                    |
+| SSN                       | 111223333            |
+| Birth Date                | 01/01/1960           |
+**************!
+!********> Beneficiary
+-!| Data                    | Beneficiary          |
+| Persone Type              | I                    |
+| First Name                | Qualbene             |
+| Last Name                 | !-BeneI-!            |
+| Address Line 1            | 1 Main St            |
+| Zip                       | 20500                |
+| Priority                  | Primary              |
+| Relationship              | Wife                 |
+| Share Type                | Total Proceeds       |
+**************!
+!********> Exchange Transfer
+-!| Data                    | Exchange Transfer    |
+| Replacement Type          | External             |
+| Source                    | Annuity              |
+| Status                    | P01                  |
+| Source Account Number     | 123456789            |
+| Source Tax Plan Type      | IRA                  |
+| Full Or Partial           | Full                 |
+| Expected Amount           | $100,000             |
+| External Carrier          | ABC EXTERN           |
+| Contact                   | Ros Contract         |
+| Forms Matrix              | EXCHANGE             |
+**************!
+!********> Initial Payment
+-!| Data                    | Initial Payment      |
+| Sub Type                  | ROLL                 |
+| Effective Date            | 10/15/2013           |
+| Cash Amount               | $100,000             |
+| Cash Received Date        | 10/15/2013           |
+**************!
+!********> Results
+-!| Annuity New Business |
+| Policy Number             |                      |
+| Policy Status             |                      |
+**************!

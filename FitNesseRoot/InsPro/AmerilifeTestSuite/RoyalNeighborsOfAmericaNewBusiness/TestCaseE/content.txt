@@ -1,0 +1,71 @@
+!1 Royal Neighbors of America: Test E
+RMD 
+
+!******** Annuity
+-!| Data                    | Annuity              |
+| Client                    | RNA0000001           |
+| Marketing File            | RNAMY-100            |
+| Application Received Date | 10/15/2011           |
+| Sign Date                 | 10/15/2011           |
+| Effective Date            | 10/15/2011           |
+| Tax Plan Type             | IRA                  |
+| Tax Plan Sub Type         | N/A                  |
+| Initial Annuity Period    | 10                   |
+**************!
+!********> Owner
+-!| Data                    | Owner                |
+| Person Type               | I                    |
+| First Name                | Qual                 |
+| Last Name                 | !-OwnerE-!           |
+| Address Line 1            | 1 Main St            |
+| Zip                       | 20500                |
+| Gender                    | M                    |
+| Marital Staus             | M                    |
+| SSN                       | 111223333            |
+| Birth Date                | 10/01/1941           |
+**************!
+!********> Beneficiary
+-!| Data                    | Beneficiary          |
+| Persone Type              | I                    |
+| First Name                | Qualbene             |
+| Last Name                 | !-BeneE-!            |
+| Address Line 1            | 1 Main St            |
+| Zip                       | 20500                |
+| Priority                  | Primary              |
+| Relationship              | Wife                 |
+| Share Type                | Total Proceeds       |
+**************!
+!********> Exchange Transfer
+-!| Data                    | Exchange Transfer    |
+| Replacement Type          | External             |
+| Source                    | Annuity              |
+| Status                    | P01                  |
+| Source Account Number     | 123456789            |
+| Source Tax Plan Type      | IRA                  |
+| Full Or Partial           | Full                 |
+| Expected Amount           | $100,000             |
+| External Carrier          | ABC EXTERN           |
+| Contact                   | Ros Contract         |
+| Forms Matrix              | EXCHANGE             |
+**************!
+!********> Initial Payment
+-!| Data                    | Initial Payment      |
+| Sub Type                  | QUTR                 |
+| Effective Date            | 10/15/2011           |
+| Cash Amount               | $100,000             |
+| Cash Received Date        | 10/15/2011           |
+**************!
+!********> Service Program
+-!| Data                    | Service Program       |
+| Type                      | Systematic Withdrawal |
+| Sub Type                  | RMD                   |
+| Withdrawal Frequency      | Annual                |
+| Penalty Waiver Reason     | None                  |
+| Effective Date            | 10/15/2011            |
+| Start Date                | 03/15/2012            |
+**************!
+!********> Results
+-!| Annuity New Business |
+| Policy Number             |                      |
+| Policy Status             |                      |
+**************!

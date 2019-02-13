@@ -1,0 +1,73 @@
+!1 Royal Neighbors of America: Test A
+SYS FLAT WD + One Gain on 02/04/2014
+
+!******** Annuity
+-!| Data                    | Annuity              |
+| Client                    | RNA0000001           |
+| Marketing File            | RNAMY-100            |
+| Application Received Date | 10/15/2012           |
+| Sign Date                 | 10/15/2012           |
+| Effective Date            | 10/15/2012           |
+| Tax Plan Type             | IRA                  |
+| Tax Plan Sub Type         | N/A                  |
+| Initial Annuity Period    | 5                    |
+**************!
+!********> Owner
+-!| Data                    | Owner                |
+| Person Type               | I                    |
+| First Name                | Qual                 |
+| Last Name                 | !-OwnerA-!           |
+| Address Line 1            | 1 Main St            |
+| Zip                       | 19063                |
+| Gender                    | M                    |
+| Marital Staus             | M                    |
+| SSN                       | 111223333            |
+| Birth Date                | 01/01/1960           |
+**************!
+!********> Beneficiary
+-!| Data                    | Beneficiary          |
+| Persone Type              | I                    |
+| First Name                | Qualbene             |
+| Last Name                 | !-BeneA-!            |
+| Address Line 1            | 1 Main St            |
+| Zip                       | 19063                |
+| Priority                  | Primary              |
+| Relationship              | Wife                 |
+| Share Type                | Total Proceeds       |
+**************!
+!********> Exchange Transfer
+-!| Data                    | Exchange Transfer    |
+| Replacement Type          | External             |
+| Source                    | Annuity              |
+| Status                    | P01                  |
+| Source Account Number     | 123456789            |
+| Source Tax Plan Type      | IRA                  |
+| Full Or Partial           | Full                 |
+| Expected Amount           | $100,000             |
+| External Carrier          | ABC EXTERN           |
+| Contact                   | Ros Contract         |
+| Forms Matrix              | EXCHANGE             |
+**************!
+!********> Initial Payment
+-!| Data                    | Initial Payment      |
+| Sub Type                  | QUTR                 |
+| Effective Date            | 10/15/2012           |
+| Cash Amount               | $100,000             |
+| Cash Received Date        | 10/15/2012           |
+**************!
+!********> Service Program
+-!| Data                    | Service Program       |
+| Type                      | Systematic Withdrawal |
+| Sub Type                  | Flat                  |
+| Withdrawal Frequency      | Quarterly             |
+| Penalty Waiver Reason     | None                  |
+| Amount                    | $2,000                |
+| Effective Date            | 10/15/2012            |
+| Start Date                | 11/15/2012            |
+| Termination Date          | 11/16/2014            |
+**************!
+!********> Results
+-!| Annuity New Business |
+| Policy Number             |                      |
+| Policy Status             |                      |
+**************!

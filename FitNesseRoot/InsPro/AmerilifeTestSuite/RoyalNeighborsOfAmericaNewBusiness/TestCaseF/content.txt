@@ -1,0 +1,49 @@
+!1 Royal Neighbors of America: Test F
+CA - WD w/ no MVA
+
+!******** Annuity
+-!| Data                    | Annuity              |
+| Client                    | RNA0000001           |
+| Marketing File            | RNAMY-100            |
+| Application Received Date | 10/15/2013           |
+| Sign Date                 | 10/15/2013           |
+| Effective Date            | 10/15/2013           |
+| Tax Plan Type             | NQ                   |
+| Tax Plan Sub Type         | N/A                  |
+| Initial Annuity Period    | 5                    |
+**************!
+!********> Owner
+-!| Data                    | Owner                |
+| Person Type               | I                    |
+| First Name                | Nonq                 |
+| Last Name                 | !-OwnerF-!           |
+| Address Line 1            | 1 Main St            |
+| Zip                       | 90001                |
+| Gender                    | M                    |
+| Marital Staus             | M                    |
+| SSN                       | 111223333            |
+| Birth Date                | 01/01/1960           |
+**************!
+!********> Beneficiary
+-!| Data                    | Beneficiary          |
+| Persone Type              | I                    |
+| First Name                | Nonqbene             |
+| Last Name                 | !-BeneF-!            |
+| Address Line 1            | 1 Main St            |
+| Zip                       | 90001                |
+| Priority                  | Primary              |
+| Relationship              | Wife                 |
+| Share Type                | Total Proceeds       |
+**************!
+!********> Initial Payment
+-!| Data                    | Initial Payment      |
+| Sub Type                  | NONQ                 |
+| Effective Date            | 10/15/2012           |
+| Cash Amount               | $100,000             |
+| Cash Received Date        | 10/15/2012           |
+**************!
+!********> Results
+-!| Annuity New Business |
+| Policy Number             |                      |
+| Policy Status             |                      |
+**************!

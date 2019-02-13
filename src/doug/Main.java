@@ -28,7 +28,7 @@ public class Main {
 		SuiteResponder suit = new SuiteResponder();
 		FitNesseContext context = ContextConfigurator.systemDefaults().makeFitNesseContext();
 		Request request = new Request(new ByteArrayInputStream("".getBytes()));
-		request.setResource(".HsacAcceptanceTests");
+		request.setResource(".InsPro");
 		suit.makeResponse(context, request);
 		List<WikiPage> pages = suit.getPagesToRun();
 		PagesByTestSystem pagesByTestSystem = new PagesByTestSystem(pages, context.getRootPage());
@@ -39,17 +39,17 @@ public class Main {
 
 		List<FitnesseScenario> scenaries = listener.getScenaries();
 		List<Pair> pairs = Pairs.from(scenaries);
-//		FileOutputStream fileOutputStream = new FileOutputStream("qualquer");
+		FileOutputStream fileOutputStream = new FileOutputStream("qualquer");
 		for (Pair pair : pairs) {
 			System.out.printf("%s	%s	%s	%s	%s	%s	%s\n", pair.getScenarioA().getFullPath(),
 					pair.getScenarioB().getFullPath(), pair.getUniform().getRelativeUniformity().getUniformity(),
 					pair.getUniform().getUniformIntputs(), pair.getUniform().getNonUniforInputs(),
 					pair.getUniform().getUniformOutputs(), pair.getUniform().getNonUniformOutputs());
 
-//			fileOutputStream.write(String.format("%s	%s	%s	%s	%s	%s	%s\n", pair.getScenarioA().getFullPath(),
-//					pair.getScenarioB().getFullPath(), pair.getUniform().getRelativeUniformity().getUniformity(),
-//					pair.getUniform().getUniformIntputs(), pair.getUniform().getNonUniforInputs(),
-//					pair.getUniform().getUniformOutputs(), pair.getUniform().getNonUniformOutputs()).getBytes());
+			fileOutputStream.write(String.format("%s	%s	%s	%s	%s	%s	%s\n", pair.getScenarioA().getFullPath(),
+					pair.getScenarioB().getFullPath(), pair.getUniform().getRelativeUniformity().getUniformity(),
+					pair.getUniform().getUniformIntputs(), pair.getUniform().getNonUniforInputs(),
+					pair.getUniform().getUniformOutputs(), pair.getUniform().getNonUniformOutputs()).getBytes());
 		}
 
 	}
