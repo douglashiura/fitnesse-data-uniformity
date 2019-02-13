@@ -1,0 +1,30 @@
+---
+Suites: basic
+Test
+---
+!4 Query by using Scripts
+!|script|SQLCommand   |PetClinicDB  |
+|openConnection                     |
+|execute|select * from owners       |
+|note   |WARNING! messy output below|
+|show   |rawResult                  |
+|show   |success                    |
+|closeConnection                    |
+
+!4 Query by using Scripts with Assertion
+!|script|SQLCommand              |PetClinicDB          |
+|openConnection                                        |
+|execute|select * from owners where FIRST_NAME='Harold'|
+|check  |getColumnValueByName    |LAST_NAME   |Davis   |
+|closeConnection                                       |
+
+!4 Query using Define Properties with Assertion
+!|Define Properties|FindOwner                                                   |
+|key               |value                                                       |
+|.include          |PetClinicDB                                                 |
+|cmd               |select LAST_NAME from owners where FIRST_NAME='%FIRST_NAME%'|
+
+!|SQLCommand|FindOwner |
+|FIRST_NAME |LAST_NAME?|
+|Harold     |Davis     |
+ 

@@ -1,0 +1,15 @@
+|table template|delete owners                    |
+|execute       |delete from owners where id=@{id}|
+|check         |success           |true          |
+
+!|Script|SQLCommand|PetClinicDB|
+|openConnection                |
+
+|delete owners|
+|id           |
+|1001         |
+|1002         |
+|1003         |
+
+!|Script|SQLCommand|PetClinicDB|
+|closeConnection               |

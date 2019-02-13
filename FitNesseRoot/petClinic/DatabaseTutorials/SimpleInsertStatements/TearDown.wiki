@@ -1,0 +1,4 @@
+!|script|SQLCommand |PetClinicDB|
+|openConnection                 |
+|execute|drop table sample_table|
+|show   |success                |

@@ -1,0 +1,26 @@
+---
+Static
+---
+|table template|add owners                                                                                               |
+|execute       |insert into owners values (@{id}, '@{firstName}', '@{lastName}', '@{address}', '@{city}', '@{telephone}')|
+|show          |rawResult                                                                                                |
+|check         |success                                               |true                                              |
+
+!|Script|SQLCommand|PetClinicDB|
+|openConnection                |
+
+|add owners                                                |
+|id |first name|last name   |address |city       |telephone|
+|111|Ayie      |Litao       |Eastwood|Quezon City|5858585  |
+|333|Erwin     |Delos Santos|Eastwood|Quezon City|12345    |
+|222|Jc        |Landrito    |Eastwood|Quezon City|22222    |
+
+#!|SQLCommand|PetClinicDB|!-insert into owners values
+#('%id%', '%first_name%', '%last_name%', '%address%', '%city%', %telephone%)-!                        |
+#|id |first_name|last_name   |address |city       |telephone|Count?|
+#|111|Ayie      |Litao       |Eastwood|Quezon City|5858585  |1     |
+#|333|Erwin     |Delos Santos|Eastwood|Quezon City|12345    |1     |
+#|222|Jc        |Landrito    |Eastwood|Quezon City|22222    |1     |
+
+!|Script|SQLCommand|PetClinicDB|
+|closeConnection               |

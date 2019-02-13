@@ -1,0 +1,34 @@
+---
+Test
+---
+|scenario        |page           |url|searches|textToSearch|
+|open            |@url                                     |
+|wait for visible|Google Search                            |
+|enter           |@textToSearch  |as |Search               |
+|click           |Google Search                            |
+|wait for visible|@textToSearch                            |
+|show            |take screenshot|result                   |
+
+|table template            |Google Search            |
+|page https://www.google.com searches @{textToSearch}|
+
+
+|script|browser test|
+
+|Google Search |
+|text to search|
+|Candy         |
+
+#|page https://www.google.com searches Puppies|
+
+
+#|script          |browser test             |
+#|open            |https://www.google.com   |
+#|wait for visible|Google Search            |
+#|enter           |Puppies        |as|Search|
+#|click           |Google Search            |
+#|wait for visible|Puppies                  |
+#|show            |take screenshot|result   |
+
+
+

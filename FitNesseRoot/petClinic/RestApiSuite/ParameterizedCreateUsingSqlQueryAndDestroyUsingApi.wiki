@@ -1,0 +1,20 @@
+---
+Suites: advanced
+Test
+---
+#|scenario         |delete users using id _|id                     |
+
+|table template   |delete users using id                   |
+|set value        |application/json|for header|Content-Type|
+|delete           |${PETCLINIC_URL}/api/owners/@{id}       |
+|show             |response status                         |
+|$response_status=|response status                         |
+
+|script|json http test|
+
+|delete users using id|
+|id  |response_status?|
+|111 |400             |
+|222 |204             |
+|333 |204             |
+|444 |404             |

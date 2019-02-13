@@ -1,0 +1,20 @@
+!*> Project Setup
+|Import                       |
+|nl.hsac.fitnesse.fixture     |
+|nl.hsac.fitnesse.fixture.slim|
+
+|import                 |
+|six42.fitnesse.jdbcslim|
+
+|define table type  |
+|SQLCommand|as Table|
+
+!|Define Properties|PetClinicDB                              |
+|key               |value                                    |
+|jdbcDriver        |com.mysql.jdbc.Driver                    |
+|dbUrl             |jdbc:mysql://${MYSQL_HOST}:3306/petclinic|
+|dbUser            |petclinic                                |
+|dbPassword        |petclinic                                |
+|dbAutoCommit      |true                                     |
+|CMD               |                                         |
+*!

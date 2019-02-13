@@ -1,0 +1,18 @@
+---
+Test
+---
+|table template  |Google Search                |
+|open            |https://www.google.com       |
+|wait for visible|Google Search                |
+|enter           |@{withTextToSearch}|as|Search|
+|click           |Google Search                |
+|wait for visible|@{withTextToSearch}          |
+|show            |take screenshot    |result   |
+
+|script|browser test|
+
+|Google Search      |
+|with text to search|
+|Puppies            |
+|Cake               |
+|Guitar             |

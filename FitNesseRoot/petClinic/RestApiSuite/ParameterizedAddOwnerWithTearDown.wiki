@@ -1,0 +1,9 @@
+---
+Suites: advanced
+Test
+---
+|add owners                                                             |
+|id  |first name             |last name|address     |city     |telephone|
+|1001|Uvuvwevwevwe Ugwemubwem|Ossas    |South Africa|Cape Town|9992222  |
+|1002|John                   |Smith    |England     |London   |919191   |
+|1003|Juan                   |Smith    |Philippines |Manila   |12345    |

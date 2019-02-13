@@ -1,0 +1,38 @@
+!define URL {${PETCLINIC_URL}/api/owners}
+
+|table template|add owners                              |
+|set value     |application/json|for header|Content-Type|
+|post                                                   |{{{
+{
+  "address": "@{address}",
+  "city": "@{city}",
+  "firstName": "@{firstName}",
+  "id": @{id},
+  "lastName": "@{lastName}",
+  "pets": [
+    {
+      "birthDate": "2017-02-20T22:44:34.044Z",
+      "id": 0,
+      "name": "string",
+      "owner": {},
+      "type": {
+        "id": 0,
+        "name": "string"
+      },
+      "visits": [
+        {
+          "date": "yyyy/MM/dd",
+          "description": "string",
+          "id": 0,
+          "pet": {}
+        }
+      ]
+    }
+  ],
+  "telephone": "@{telephone}"
+}
+}}}|to|${URL}|
+|show |response           |
+|check|response status|201|
+
+|script|json http test|

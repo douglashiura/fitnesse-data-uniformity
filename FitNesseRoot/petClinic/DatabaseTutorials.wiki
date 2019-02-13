@@ -1,0 +1,6 @@
+---
+Suite
+---
+More documentations about executing Database queries in FitNesse can be found in the [[JDBC Slim Documentation Page][.Plugins.JdbcSlim]]
+
+!contents -R2 -g -p -f -h

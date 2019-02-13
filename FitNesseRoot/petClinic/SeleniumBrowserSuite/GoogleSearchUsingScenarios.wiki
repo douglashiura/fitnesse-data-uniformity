@@ -1,0 +1,13 @@
+---
+Test
+---
+|scenario        |page               |pageUrl|searches|withTextToSearch|
+|open            |@{pageUrl}                                           |
+|wait for visible|Google Search                                        |
+|enter           |@{withTextToSearch}|as     |Search                   |
+|click           |Google Search                                        |
+|wait for visible|@{withTextToSearch}                                  |
+|show            |take screenshot    |result                           |
+
+|script             |browser test            |
+|page https://www.google.com searches Puppies|

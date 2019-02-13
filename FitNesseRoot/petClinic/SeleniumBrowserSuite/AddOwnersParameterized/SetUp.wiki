@@ -1,0 +1,20 @@
+!define URL {${PETCLINIC_URL}/owners/find.html}
+
+|table template  |Register Pet Clinic Owners                                                            |
+|open            |${URL}                                                                                |
+|click           |Add Owner                                                                             |
+|enter           |@{name}        |as                                                |id=firstName       |
+|enter           |@{lastName}    |as                                                |id=lastName        |
+|enter           |@{address}     |as                                                |id=address         |
+|enter           |@{city}        |as                                                |id=city            |
+|enter           |@{telephone}   |as                                                |id=telephone       |
+|show            |take screenshot|registration                                                          |
+|click           |Add Owner                                                                             |
+|wait for visible|Owner Information                                                                     |
+|check           |value of       |xpath=/html/body/div/div/table[1]/tbody/tr[1]/td/b|@{name} @{lastName}|
+|check           |value of       |xpath=/html/body/div/div/table[1]/tbody/tr[2]/td  |@{address}         |
+|check           |value of       |xpath=/html/body/div/div/table[1]/tbody/tr[3]/td  |@{city}            |
+|check           |value of       |xpath=/html/body/div/div/table[1]/tbody/tr[4]/td  |@{telephone}       |
+|show            |take screenshot|show_info                                                             |
+
+|script|browser test|

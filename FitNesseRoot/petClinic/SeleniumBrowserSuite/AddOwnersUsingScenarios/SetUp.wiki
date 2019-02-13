@@ -1,0 +1,22 @@
+!define URL {${PETCLINIC_URL}/owners/find.html}
+
+|scenario|Given a page url ${URL}|
+|open    |${URL}                 |
+|click   |Add Owner              |
+
+|scenario|When I register a new Owner    |
+|enter   |John           |as|id=firstName|
+|enter   |Doe            |as|id=lastName |
+|enter   |USA            |as|id=address  |
+|enter   |New York       |as|id=city     |
+|enter   |12345          |as|id=telephone|
+|show    |take screenshot|registration   |
+|click   |Add Owner                      |
+
+|scenario        |Then I should see a new information added                                  |
+|wait for visible|Owner Information                                                          |
+|check           |value of       |xpath=/html/body/div/div/table[1]/tbody/tr[1]/td/b|John Doe|
+|check           |value of       |xpath=/html/body/div/div/table[1]/tbody/tr[2]/td  |USA     |
+|check           |value of       |xpath=/html/body/div/div/table[1]/tbody/tr[3]/td  |New York|
+|check           |value of       |xpath=/html/body/div/div/table[1]/tbody/tr[4]/td  |12345   |
+|show            |take screenshot|show_info                                                  |

@@ -1,0 +1,14 @@
+!*> Configuration
+!5 You can change the PETCLINIC_HOST variable with your local ip address.
+!define PETCLINIC_HOST {petclinic} 
+!define PETCLINIC_URL {http://${PETCLINIC_HOST}:9966/petclinic}
+!define MYSQL_HOST {mysql}
+*!
+
+!contents -R2 -g -p -f -h
+
+!include -c >Installation
+
+Define all tests to be executed as SLIM:
+!define TEST_SYSTEM {slim}
+

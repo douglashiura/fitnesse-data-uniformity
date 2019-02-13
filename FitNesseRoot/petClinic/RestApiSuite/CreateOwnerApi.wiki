@@ -1,0 +1,41 @@
+---
+Suites: basic
+Test
+---
+!define URL {${PETCLINIC_URL}/api/owners}
+
+|script   |json http test                          |
+|set value|application/json|for header|Content-Type|
+|post                                              |{{{
+{
+  "address": "South Africa",
+  "city": "Johannesburg",
+  "firstName": "HACKATHON Ugwemubwem",
+  "id": 444,
+  "lastName": "Ossas",
+  "pets": [
+    {
+      "birthDate": "2017-02-20T22:44:34.044Z",
+      "id": 0,
+      "name": "string",
+      "owner": {},
+      "type": {
+        "id": 0,
+        "name": "string"
+      },
+      "visits": [
+        {
+          "date": "yyyy/MM/dd",
+          "description": "string",
+          "id": 0,
+          "pet": {}
+        }
+      ]
+    }
+  ],
+  "telephone": "999555"
+}
+}}}|to|${URL}|
+|show|response status|
+|show|response       |
+|check|response status|201|

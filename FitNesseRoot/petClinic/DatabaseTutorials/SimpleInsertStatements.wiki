@@ -1,0 +1,18 @@
+---
+Suites: basic
+Test
+---
+!4 Insert using Scripts and Assert that returned row count is 1
+!|script|SQLCommand              |PetClinicDB      |
+|openConnection                                    |
+|execute|insert into sample_table values('John',25)|
+|show   |success                                   |
+|check  |getColumnValueByName    |Count     |1     |
+
+!4 Parameterized Insert with Assertion
+!|SQLCommand|PetClinicDB|insert into sample_table values('%name%',%age%)|
+|name       |age        |Count?                                         |
+|John Smith |33         |1                                              |
+|John Doe   |55         |1                                              |
+!5 A much more advanced parameterized insert using scenario templates can be found [[here][.PetClinic.RestApiSuite.ParameterizedCreateUsingSqlQueryAndDestroyUsingApi.SetUp]]!
+----

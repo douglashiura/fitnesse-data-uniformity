@@ -1,0 +1,18 @@
+!5 Install and Start MySQL container database for the Petclinic app
+{{{docker run --name mysql -e MYSQL_ROOT_PASSWORD=petclinic -e MYSQL_DATABASE=petclinic -e MYSQL_USER=petclinic -e MYSQL_PASSWORD=petclinic -p 3306:3306 -d mysql:5.7}}}
+!5 Get the Petclinic app
+{{{git clone https://github.com/spring-petclinic/spring-petclinic-rest.git}}}
+!5 Modify the pom.xml ''MySQL'' profile
+{{{
+458             <id>MySQL</id>
+459             <properties>
+460                 <db.script>mysql</db.script>
+461                 <jpa.database>MYSQL</jpa.database>
+462                 <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
+463                 <jdbc.url>jdbc:mysql://localhost:3306/petclinic?useUnicode=true</jdbc.url>
+464                 <jdbc.username>root</jdbc.username>
+465                 <jdbc.password>petclinic</jdbc.password>
+466             </properties>
+}}}
+!5 Run Petclinic app
+{{{./mvnw tomcat7:run -P MySQL}}}

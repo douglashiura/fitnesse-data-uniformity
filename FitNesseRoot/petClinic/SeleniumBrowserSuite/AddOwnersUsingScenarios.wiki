@@ -1,0 +1,8 @@
+---
+Suites: intermediate
+Test
+---
+|script           |browser test           |
+|Given a page url ${URL}                  |
+|When I register a new Owner              |
+|Then I should see a new information added|

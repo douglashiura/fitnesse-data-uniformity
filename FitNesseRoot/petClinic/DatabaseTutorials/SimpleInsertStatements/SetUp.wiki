@@ -1,0 +1,4 @@
+!|script|SQLCommand                  |PetClinicDB                 |
+|openConnection                                                   |
+|execute|create table sample_table (name VARCHAR(20), age INTEGER)|
+|show   |success                                                  |

@@ -1,0 +1,24 @@
+---
+Suites: basic
+Test
+---
+!define URL {${PETCLINIC_URL}}
+
+|script          |browser test                                                                   |
+|open            |${URL}/owners/find.html                                                                         |
+|click           |Add Owner                                                                      |
+|wait for visible|New Owner|
+|enter           |John           |as                                                |id=firstName|
+|enter           |Doe            |as                                                |id=lastName |
+|enter           |USA            |as                                                |id=address  |
+|enter           |New York       |as                                                |id=city     |
+|enter           |12345          |as                                                |id=telephone|
+|show            |take screenshot|registration                                                   |
+|click           |Add Owner                                                                      |
+|wait for visible|Owner Information                                                              |
+|check           |value of       |xpath=/html/body/div/div/table[1]/tbody/tr[1]/td/b|John Doe    |
+|check           |value of       |xpath=/html/body/div/div/table[1]/tbody/tr[2]/td  |USA         |
+|check           |value of       |xpath=/html/body/div/div/table[1]/tbody/tr[3]/td  |New York    |
+|check           |value of       |xpath=/html/body/div/div/table[1]/tbody/tr[4]/td  |12345       |
+|show            |take screenshot|show_info                                                      |
+

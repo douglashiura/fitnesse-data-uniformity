@@ -1,0 +1,19 @@
+HSAC Configuration
+!path fixtures
+!path fixtures/*.jar
+
+JDBC SLIM library
+!define JdbcSlimLib {jdbcslim.jar}
+
+JDBC SLIM Installation Path
+!define LibInstallPath {plugins/jdbcslim/}
+!path ${LibInstallPath}${JdbcSlimLib}
+
+JDBC Driver Path
+!path ${LibInstallPath}ojdbc6.jar
+!path ${LibInstallPath}mysql-connector-java-5.1.40-bin.jar
+
+This is required to support encryption.
+!path ${LibInstallPath}commons-codec-1.10.jar
+!path ${LibInstallPath}dbfit-core-3.2.0.jar
+
