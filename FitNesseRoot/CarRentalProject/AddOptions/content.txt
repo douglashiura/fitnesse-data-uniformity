@@ -1,0 +1,60 @@
+Story:
+
+As a user I want to be able to rent a car.
+In the process of renting a car, I want to be able to select different options to include in to my car rental.
+The total price in the contract should equal the sum total of the base rental car and the included option(s).
+
+
+Tests: 
+
+1) prime the database with known options.
+
+!|Initialize with options|
+| option name | daily rate |
+| GPS | 2500 |
+| car seat | 4500 |
+| satellite radio | 1500 |
+| roadside assistance | 1000 | 
+
+
+2) Prime the database with a car to rent
+
+!| Initialize with cars |
+| vin   | description | dailyRate |
+| ford1| 2002 Blue Ford Taurus |  4500 |
+
+
+3) Rent the car and select options
+
+!| rent car |
+| renterName | driversLicenseNumber | creditCardNumber | vin| todaysDate | numberOfDays | option name | contract id? |
+| John Q. Public | M123-4567-7890    | 9876543210987    | ford1 | 3/22/15    | 3            | GPS, car seat |    $id=      |
+
+A contract will be generated for the above rental. It will look something like this:
+{{{
+Dare Devil Motors           John Q. Public          2002 Blue Ford Taurus
+Car Rental Div.             Rented: 03/22/15
+
+Your charges will be for 3 days at $115.00 per day.
+Your selected options are: GPS, car seat.
+You are required to return on March 25, 2015 by 18:00 to
+avoid late fees that we'll make up on the spot.
+
+Paid by ************0987    
+
+}}}
+
+
+Verify that the generated contract contains the right data.  We'll specify which contract to search by using the vin of the car.
+
+!|check contract text for| $id |
+| text | is in contract? |
+| 2002 Blue Ford Taurus|true|
+| John Q. Public | true|
+| Rented: 03/22/15  | true |
+| 3 days at $115.00 per day | true |
+| GPS, car seat | true |
+| return on March 25, 2015  | true |
+| Paid by ************0987 | true |
+| Smoking allowed | false |
+

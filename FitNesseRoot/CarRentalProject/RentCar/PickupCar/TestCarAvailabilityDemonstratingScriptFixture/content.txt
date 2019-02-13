@@ -1,0 +1,15 @@
+|script: test availability|
+||
+|add car with vin| vw1 | and description | 1965 Rusty VW | and daily rental rate |1500|
+|add car with vin| acura1 | and description | 1998 Acura RL | and daily rental rate |4500|
+|add car with vin| lexus1 | and description | 2005 Lexus LS430 | and daily rental rate |15500|
+||
+|ensure| car with vin |vw1| is available for rental|
+|check | number of cars available for rent is |3|
+
+
+
+
+
+
+

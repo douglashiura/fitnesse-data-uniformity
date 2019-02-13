@@ -1,0 +1,6 @@
+When the user returns the car, the vin will be entered into the system and a receipt for the rental will be created, based upon the data stored at the time of pickup.
+
+Tests:
+
+* >TestReceipt
+* >TestCarAvailability

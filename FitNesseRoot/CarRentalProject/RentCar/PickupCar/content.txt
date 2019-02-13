@@ -1,0 +1,10 @@
+
+
+Story:
+
+The user will indicate that she wants to rent a car and the system will display a listing of cars that are available for rent. A car will be selected from this list and the following information will be entered: renter's name, driver license number, credit card number, and the number of days the renter anticipates keeping the car. A contract is printed, the renter is given the keys to the car, and off she goes.
+
+
+Tests: 
+!contents -R2 -g -p -f -h
+

@@ -1,0 +1,20 @@
+!define TEST_SYSTEM {slim}
+!define COLLAPSE_SETUP {true}
+!define COLLAPSE_TEARDOWN {true}
+
+!path fitnesse-standalone.jar
+!path /Users/jeremyideus/Documents/TestspaceVOIS/maven.1435163914795/bin
+
+
+
+A theme can be thought of as a collection of user stories
+  or a big story - too big to complete in an iteration/sprint.
+  Some people call these "epics".
+
+Themes:
+  
+  * >RentCar
+  * >CarSearch
+  * >AddOptions
+
+

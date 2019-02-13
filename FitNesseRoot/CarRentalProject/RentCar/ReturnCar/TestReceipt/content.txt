@@ -1,0 +1,63 @@
+When a rented car is returned, a receipt will be printed.  This will contain information like the final price, dates, and payment method.
+
+----
+We'll start by adding cars to be rented then returned.
+
+| initialize with cars |
+| vin | description | dailyRate |
+| ford1| 2002 Blue Ford Taurus |  4500 |
+| vw1| 1965 Rusty VW Bug | 1500 |
+| acura1 | 1998 Acura RL | 4500 |
+| lexus1 | 2005 Lexus LS430 | 15500 |
+
+Rent some cars
+
+| Rent Car |
+| renterName | driversLicenseNumber | creditCardNumber | vin | todaysDate | numberOfDays | contractId? |
+| John Q. Public | M123-4567-7890    | 9876543210987    | ford1 | 3/22/15    | 3 | $fordContractId= |
+| John's Significant Other | M123-4567-7891    | 9876543210987    | lexus1 | 3/22/15    | 3 | $lexusContractId= |
+
+
+
+When the renter returns the car, the rental agent will enter the vehicle ID that's printed on the keychain. Today's date is entered for the return date and a receipt is printed. 
+
+| Return Car | ford1 | $fordContractId |
+
+The receipt looks as follows:
+{{{
+Acme Motors Car Rental Division       
+
+John Q. Public
+
+Date rented: March 22, 2015
+Date returned: March 25, 2015
+
+ford1 days @ $ 45.00
+
+Total charges: $ 135.00
+
+Charged to *********0987    
+}}}
+#
+Verify the the correct information is printed on the receipt.  We'll identify the receipt in question by using the vin.
+
+|examine receipt|ford1|
+|text | isOnReceipt? |
+|John Q. Public |true|
+|Date rented: March 22, 2015| true |
+|Date returned: March 25, 2015 | true |
+| ford1 3 days @ $45.00 | true |
+| Total charges: $135.00 | true |
+| Charged to ************0987|true |
+| Free of charge | false |
+
+Bring the Lexus back after only one day and check calculations
+
+| Return Car | lexus1 | $lexusContractId |
+
+|examine receipt| lexus1 |
+|text | isOnReceipt? |
+|Date rented: March 22, 2015| true |
+|Date returned: March 23, 2015 | true |
+| lexus1 1 days @ $155.00 | true |
+| Total charges: $155.00 | true |

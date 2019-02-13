@@ -1,0 +1,32 @@
+After a car is rented, it should not show up as being available to be rented until after the car is returned.
+
+
+First, prime the database with known cars.
+
+!|Initialize with cars|
+| vin | description | dailyRate |
+| vw1| 1965 Rusty VW Bug | 1500 |
+| acura1 | 1998 Acura RL | 4500 |
+| lexus1 | 2005 Lexus LS430 | 15500 |
+
+Verify that all cars are shown as available
+
+!|query: show available cars|
+| vin    | description       | daily rate |
+| vw1    | 1965 Rusty VW Bug | 1500 |
+| acura1 | 1998 Acura RL     | 4500 |
+| lexus1 | 2005 Lexus LS430 | 15500 |
+
+
+Select the Acura for rental.
+
+!|rent car|acura1|
+
+
+Acura should not show up as available for rental
+
+!|query: show available cars|
+| vin | description | daily rate |
+| vw1| 1965 Rusty VW Bug | 1500 |
+| lexus1 | 2005 Lexus LS430 | 15500 |
+

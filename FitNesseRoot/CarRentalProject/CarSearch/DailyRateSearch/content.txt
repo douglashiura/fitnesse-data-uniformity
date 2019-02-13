@@ -1,0 +1,26 @@
+Story:
+
+As a user I want to be able to search for a car within a given price range.  The results should return in ascending order.
+
+
+Tests: 
+
+First, prime the database with known cars.
+
+!|Initialize with cars|
+| vin | description | dailyRate |
+| vw1| 1965 Rusty VW Bug | 1500 |
+| acura1 | 1998 Acura RL | 4500 |
+| lexus1 | 2005 Lexus LS430 | 15500 |
+
+Verify that I can find car within price range
+!|query: show cars in price range|2000 to 7000|
+| vin    | description       | daily rate |
+| acura1 | 1998 Acura RL     | 4500 |
+
+Verify that no cars returned if not within price range
+!|query: show cars in price range|1000 to 1300|
+| vin    | description       | daily rate |
+
+
+
