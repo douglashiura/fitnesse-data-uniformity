@@ -379,7 +379,7 @@ public class ScriptTable extends SlimTable {
 		}
 	}
 
-	private class ShowActionExpectation extends RowExpectation {
+	public class ShowActionExpectation extends RowExpectation {
 		public ShowActionExpectation(int col, int row, Table table, SlimTestContext testContext) {
 			super(col, row, table, testContext);
 		}
