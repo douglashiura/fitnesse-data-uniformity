@@ -1,0 +1,48 @@
+!1 Standardregler for beregning av fraktkostnader
+Butikken vår operer med et meget enkelt system for beregning av fraktkostnader. 
+Kilosprisen er 10 pr kilo for de første ti, deretter 5 for de neste 25 og 2 pr kilo utover 35
+
+|Registrer varer|
+|Varenavn |Vekt |
+|Frimerke |0.01 |
+|Leksikon |1    |
+|Bokhylle |15   |
+
+|Handlekurv                                    |
+|Antall|Varenavn|Legg i handlekurven ()        |
+|1     |Frimerke|1 Frimerke lagt i handlekurven|
+
+|check|Frakt kostnad|0|
+
+|Handlekurv                                      |
+|Antall|Varenavn|Legg i handlekurven ()          |
+|100   |Frimerke|100 Frimerke lagt i handlekurven|
+|1     |Leksikon|1 Leksikon lagt i handlekurven  |
+
+|check|Frakt kostnad|20|
+
+|Handlekurv                                    |
+|Antall|Varenavn|Legg i handlekurven ()        |
+|1     |Bokhylle|1 Bokhylle lagt i handlekurven|
+
+|check|Frakt kostnad|125|
+
+|Handlekurv                                    |
+|Antall|Varenavn|Legg i handlekurven ()        |
+|8     |Leksikon|8 Leksikon lagt i handlekurven|
+|2     |Bokhylle|2 Bokhylle lagt i handlekurven|
+
+|check|Frakt kostnad|231|
+
+|Handlekurv                                     |
+|Antall|Varenavn|Legg i handlekurven ()         |
+|35    |Leksikon|35 Leksikon lagt i handlekurven|
+
+|check|Frakt kostnad|225|
+
+|Handlekurv                                     |
+|Antall|Varenavn|Legg i handlekurven ()         |
+|36    |Leksikon|36 Leksikon lagt i handlekurven|
+
+|check|Frakt kostnad|227|
+

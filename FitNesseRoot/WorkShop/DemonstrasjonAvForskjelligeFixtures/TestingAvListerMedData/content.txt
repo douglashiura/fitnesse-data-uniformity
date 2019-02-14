@@ -1,0 +1,56 @@
+!1 Når vi skal validere mange verdier samtidig
+!-En ganske vanlig ting å teste er og validere flere elementer samtidig. Til dette har vi tre forskjellige fixtures avhengig av hva du vil teste.-!  
+
+|Test data for validering av lister|
+|Kjøretøytype|Antall hjul|Motortype|Farge|
+|Lastebil|6|Disel|Hvit|
+|Buss|4|Disel|Hvit|
+|Leddbuss|6|Disel|Rød|
+
+!2 !-SetFixture-!
+Sjekker at alle elementer er med og at det ikke er noen ekstra elementer
+!|Demonstrasjon av SetFixture|
+|Kjøretøytype|Antall hjul|Motortype|Farge|
+|Lastebil|6|Disel|Hvit|
+|Buss|4|Disel|Hvit|
+|Leddbuss|6|Disel|Rød|
+
+!|Demonstrasjon av SetFixture|
+|Kjøretøytype|Antall hjul|Motortype|Farge|
+|Buss|4|Disel|Hvit|
+|Leddbuss|6|Disel|Rød|
+
+!|Demonstrasjon av SetFixture|
+|Kjøretøytype|Antall hjul|Motortype|Farge|
+|Lastebil|6|Disel|Hvit|
+|Buss|4|Disel|Hvit|
+|Motorsykkel|2|Bensin|Svart|
+|Leddbuss|6|Disel|Rød|
+
+!2 !-ArrayFixture-!
+!-Samme som SetFixture, men krever at rekkefølgen er den samme-!
+!|Demonstrasjon av ArrayFixture|
+|Kjøretøytype|Antall hjul|Motortype|Farge|
+|Lastebil|6|Disel|Hvit|
+|Buss|4|Disel|Hvit|
+|Leddbuss|6|Disel|Rød|
+
+!|Demonstrasjon av ArrayFixture|
+|Kjøretøytype|Antall hjul|Motortype|Farge|
+|Buss|4|Disel|Hvit|
+|Lastebil|6|Disel|Hvit|
+|Leddbuss|6|Disel|Rød|
+
+!2 !-SubSetFixture-!
+!-Som SetFixture er rekkefølgen på radene uvesentlig, men denne sjekker bare at den inneholder de elementene du har oppgitt. Kommer det flere tilbake fra systemet under test er det helt OK og markers ikke som noen feil.-!
+!|Demonstrasjon av SubSetFixture|
+|Kjøretøytype|Antall hjul|Motortype|Farge|
+|Lastebil|6|Disel|Hvit|
+
+!-FitLibrary-! sin egen dokumentasjon av [[!-SetFixture-!][.FitLibrary.UserGuide.FitLibraryByExample.UnorderedList]]
+!-FitLibrary-! sin egen dokumentasjon av [[!-ArrayFixture-!][.FitLibrary.UserGuide.FitLibraryByExample.OrderedList]]
+!-FitLibrary-! sin egen dokumentasjon av [[!-SubSetFixture-!][.FitLibrary.UserGuide.FitLibraryByExample.SubSet]]
+
+----The following specifies the expected counts of passes, fails, etc for the page. This is used here to avoid manually checking, as here the storytests are written to fail. You'll probably not use this technique, as you'd expect all your storytests to pass. There are other techniques to use with ''!-FitLibrary-!'' to test for expected failures (eg, the ''not'' action of ''!-DoFixture-!'').
+|!-fitlibrary.DoFixture-!                                                        |
+|''expected test results''|52|''right''|6|''wrong''|0|''ignored''|0|''exceptions''|

@@ -1,0 +1,33 @@
+!1 Vi har to alternativer - !-RowEntryFixture og SetUpFixture-!
+!-RowEntryFixture kommer fra Fit og er en variant av ColumnFixture, mens SetUpFixture kommer fra FitLibrary. Som dere ser er formatet på dem likt, men det er noen underliggende forskjeller likevel.
+
+
+RowEntryFixture <ul>
+<li>+ Rekkefølgen på kolonnene er likegyldig.
+<li>+ Trenger ikke ta med andre kolonner enn de du trenger hvis noen av dem ikke er påkrevd  
+<li>- markerer hver rad som right/wrong noe som gir litt misvisende tall når du summerer opp hva som testes. Denne brukes jo i utgangspunktet for å sette opp systemet slik at vi kan teste og er dermed egentlig ikke relvant i oppsummeringen.
+</ul>
+SetUpFixture <ul>
+<li>- Rekkefølgen og antallet parameter er låst ved implementasjon, men man kan ha flere implementasjoner som dermed gir støtte for forskjellige varainter av antall parametere og rekkefølge. 
+<li>+ Markerer kun ved feil
+</ul>-!
+
+|!-RowEntryColorLinker-!|
+|Color name |sRGB       |
+|RED        |(255, 0, 0)|
+|BLACK      |(0, 0, 0)  |
+|BLACK      |(0, 0, 0)  |
+
+|!-SetUpColorLinker-!  |
+|Color name|sRGB       |
+|RED       |(255, 0, 0)|
+|BLACK     |(0, 0, 0)  |
+|BLACK     |(0, 0, 0)  |
+
+
+!-FitNesse-! sin egen dokumentasjon av [[!-RowEntryFixture-!][.FitNesse.UserGuide.RowEntryFixture]]
+!-FitLibrary-! sin egen dokumentasjon av [[!-SetUpFixture-!][.FitLibrary.UserGuide.FitLibraryByExample.SetUpFixture]]
+
+----The following specifies the expected counts of passes, fails, etc for the page. This is used here to avoid manually checking, as here the storytests are written to fail. You'll probably not use this technique, as you'd expect all your storytests to pass. There are other techniques to use with ''!-FitLibrary-!'' to test for expected failures (eg, the ''not'' action of ''!-DoFixture-!'').
+|!-fitlibrary.DoFixture-!                                                        |
+|''expected test results''|2|''right''|2|''wrong''|0|''ignored''|1|''exceptions''|

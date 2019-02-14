@@ -1,0 +1,2 @@
+!1 Funksjonalitet rundt handlekurven
+!contents -R2 -g -p -f -h

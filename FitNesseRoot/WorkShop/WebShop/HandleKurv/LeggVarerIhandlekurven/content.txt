@@ -1,0 +1,12 @@
+!include -setup <WebShop.NettButikk.RegistrerVarer
+
+|Handlekurv                                         |
+|Antall|Varenavn|Legg i handlekurven ()             |
+|1     |Eple    |1 Eple lagt i handlekurven         |
+|2     |Plomme  |2 Plomme lagt i handlekurven       |
+|1     |Hest    |Hest er ikke registrert i butikken.|
+
+|Vis handlekurv |
+|Varenavn|Antall|
+|Eple    |1     |
+|Plomme  |2     |

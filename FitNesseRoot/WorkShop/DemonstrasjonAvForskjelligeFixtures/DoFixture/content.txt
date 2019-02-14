@@ -1,0 +1,32 @@
+!1 !-Den nyttigste tingen i hele FitLibrary -!
+!-DoFixture er brukt til å definere og teste en arbeidsflyt. Målet for implementasjonen var å gjøre testene mer lesbare, 
+men den er mange andre fordeler som også har kommet ut av den opprinnlige implementasjonen. -!
+
+!-I testene som vi har skrevet her er det bare en klasse som det referes eksplsitt til og det er FitxtureDemo. Andre klasser 
+vi har behov for ligger nede i koden der den hører hjemme. Dette gjør at man f.eks. kan gjenbruke testene i forskjellige suiter 
+med forskjellige implementasjoner: <ul>
+<li> mocked/stubbed eller komplett integrasjonstest
+<li> Firefox, Chrome eller Internet Explorer 
+</ul>-!
+!2 Hvilken kode har jeg tilgjengelig til å skrive tester mot?
+|help|
+
+|help with | color linker |
+
+!-FitLibrary-! sin egen dokumentasjon av [[!-WhatIsInScope-!][.FitLibrary.SpecifiCations.GlobalActionsProvided.WhatIsInScope]]
+
+!2 Handlinger
+!-Handlinger i FitLibrary starter med et (eller flere) nøkkelord som settes sammen fra alle oddetalscellene og variablene hentes fra alle partallscellene. 
+I tillegg har FitLibrary en rekke spesial handlinger (''show'', ''check'', ''not'' m.fl) som affekterer resten av sin rad. Noen eksempler gis her og ellers 
+vises det til FitLibrary sin egen dokumentasjon av-! [[!-DoFixture-!][.FitLibrary.UserGuide.FitLibraryByExample.DoFixture]] og [[!-DoFixtureSummary-!][.FitLibrary.UserGuide.FitLibraryByExample.DoFixture.DoFixtureSummary]]
+
+|show |Denne metoden setter sammen et | ord | med et | annet | ord. Show viser returverdien etter den siste cellen |
+|check |Denne metoden setter sammen et | ord | med et | annet | ord. Check validerer returverdien mot den siste celle i raden| ord annet |
+|check |Denne metoden setter sammen et | ord | med et | annet | ord. Check validerer returverdien mot den siste celle i raden| ord med et annet |
+|Hvis den naturlige setningsbygningen tilsier at det kommer |to|| variabler| etter hverandre må man ha en tom celle som her| 
+|En metode som returner true vil farges grønn|
+|mens en metode som returner false vil farges rød|
+|not| negerer slik at denne som returnerer false blir grønn|
+
+----The following specifies the expected counts of passes, fails, etc for the page. This is used here to avoid manually checking, as here the storytests are written to fail. You'll probably not use this technique, as you'd expect all your storytests to pass. There are other techniques to use with ''!-FitLibrary-!'' to test for expected failures (eg, the ''not'' action of ''!-DoFixture-!'').
+|''expected test results''|5|''right''|2|''wrong''|0|''ignored''|0|''exceptions''|

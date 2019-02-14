@@ -1,0 +1,38 @@
+!1 !-ColumnFixture - The Excel of FitNesse-!
+Kan bruke (og misbrukes) til alt. Prosesseres kolonne for kolonne og rad for rad.
+
+!2 Basis
+Kolonner er enten variabler eller metoder. Metoder synligjøres ved enten "()" eller "?"
+|Subtraksjon                    |
+|Minuend|Subtrahend|Differanse()|
+|10     |2         |8           |
+
+|Subtraksjon                   |
+|Minuend|Subtrahend|Differanse?|
+|10     |2         |8          |
+
+!2 Gjentatte settinger av en variabel eller kall til en metode
+En variabel eller et metodekall kan gjøres gjentatte ganger på en rad.
+|Subtraksjon                                                                            |
+|Minuend|Subtrahend|Differanse()|Subtrahend|Differanse()|Minuend|Subtrahend|Differanse()|
+|10     |2         |8           |9         |1           |800    |450       |350         |
+
+!2 Tomme celler
+Hvis du ikke setter en variabel vil !-FitNesse-! vise deg hvilken verdi den har, og resultatet av metodekallet 
+|Subtraksjon                                                                                                                                |
+|Minuend|Subtrahend|Differanse()|Kommentar                                                                                                  |
+|       |          |            |Minuend og Subtrahend er null siden ingen verdier er satt, og Differanse kan heller ikke regnes ut => error|
+|10     |2         |8           |Som tidligere eksempler                                                                                    |
+|       |          |            |"Arver" verdiene fra raden over                                                                            |
+
+!2 Nøkkelord for celler
+Hvis du ønsker å ha inn den tomme strengen ("") må du benytte nøkkelordet "blank", og hvis du øsnker å sette verdien til ingenting (ikke satt) bruker du ordet "null".
+!|fitnesse.fixtures.NullAndBlankFixture|
+|nullString|blankString|nullString?|blankString?|isNull?|isBlank?|
+|null      |blank      |null       |blank        |Y      |Y      |
+|          |           |           |             |Y      |Y      |
+|bob       |micah      |           |             |N      |N      |
+
+----
+!-FitNesse-! sin egen dokumentasjon av [[!-ColumnFixture-!][.FitNesse.UserGuide.ColumnFixture]]
+!-FitNesse-! sin egen dokumentasjon av [[Blank og null][.FitNesse.SuiteAcceptanceTests.SuiteFixtureTests.SuiteGeneralFixtureSpec.TestBlankAndNullCells]]

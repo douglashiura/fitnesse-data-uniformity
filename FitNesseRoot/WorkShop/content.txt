@@ -1,0 +1,12 @@
+!*< Setup FitLibrary
+!path ${java.class.path}
+!path lib/*.jar
+!path target/classes/
+!path target/test-classes/
+*!
+
+!1 Toppnivået for vår nye Webshop
+!include -seamless >KjekkeVerktoy.SearchAndExecute
+
+!contents -R2 -g -p -f -h
+!define TEST_SYSTEM {slim}

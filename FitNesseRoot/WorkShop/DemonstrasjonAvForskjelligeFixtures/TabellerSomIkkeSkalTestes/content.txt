@@ -1,0 +1,33 @@
+!1 Bruk av tabeller som ikke skal testes
+
+
+!2 Kommetartabeller
+Noen ganger er det ønskelig å forklare noe i en tabell uten at du vil at !-FitNesse-! skal tolke det som en test. Til dette trenger 
+du en !-ComentTable-!. Kommentartabeller lages ved å putte ''comment'' alene i den første raden 
+
+|comment|
+|This table is just a comment|
+|and will not participate|
+|in the tests on this page.|
+
+Når du kjørere en test vil slike tabeller ignoreres fullstendig av !-FitNesse-!. Ønsker
+
+!2 Midlertidig slå av testtabeller
+Noen ganger har du en testtabell som du ønsker at ikke skal testes nå, men som du fortsatt vil skal regnes som en testtabell. Da legger 
+du inn en ny første rad med et av ordene ''ignore'', ''ignored'' eller ''ignoreTable''. Da vil tabellen markeres som ignorert (raden du 
+la til blir går) og den telles opp som ignorert.
+
+|ignore|
+|Subtraksjon                    |
+|Minuend|Subtrahend|Differanse()|
+|10     |2         |8           |
+
+|ignored|
+|Subtraksjon                    |
+|Minuend|Subtrahend|Differanse()|
+|10     |2         |8           |
+
+|ignoreTable|
+|Subtraksjon                    |
+|Minuend|Subtrahend|Differanse()|
+|10     |2         |8           |
