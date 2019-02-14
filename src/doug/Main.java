@@ -28,7 +28,7 @@ public class Main {
 		SuiteResponder suit = new SuiteResponder();
 		FitNesseContext context = ContextConfigurator.systemDefaults().makeFitNesseContext();
 		Request request = new Request(new ByteArrayInputStream("".getBytes()));
-		request.setResource(".ProjectXebium");
+		request.setResource(".cob_spec");
 		suit.makeResponse(context, request);
 		List<WikiPage> pages = suit.getPagesToRun();
 		PagesByTestSystem pagesByTestSystem = new PagesByTestSystem(pages, context.getRootPage());
