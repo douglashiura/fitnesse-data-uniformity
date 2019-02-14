@@ -1,0 +1,152 @@
+${BEGIN_SLIDES}${BEGIN_SLIDE}
+
+!1 Eine gemeinsame Sprache finden
+
+!2 Spezifikation mit Beispielen
+
+!2 Gregor Gramlich
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET001.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET002.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET003.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET004.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET005.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET006.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET006a.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET007.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET008.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET009.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET010.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET011.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET011a.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET012.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET013.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET014.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET014a.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET015.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+!-<p class="cartoon">
+<img src="/files/cartoons/ET015a.jpg" class="cartoon" />
+</p>-!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+|Mannschaft|XYZ             |
+|Trikot    |Nachname|Vorname|
+|0         |Marion  |Shawn  |
+|41        |Nowitzki|Dirk   |
+
+![ script
+Spieler Nummer 41 von XYZ ist Dirk Nowitzki
+Spieler Nummer 23 von XYZ ist unbekannt
+Spieler Nummer 11 von A ist unbekannt
+]!
+
+${END_SLIDE}${BEGIN_SLIDE}
+
+|Mannschaft|XYZ             |
+|Trikot    |Nachname|Vorname|
+|0         |Marion  |Shawn  |
+|41        |Nowitzki|Dirk   |
+
+![ script
+Spieler Nummer 41 von XYZ ist Dirk Nowitzki
+Spieler Nummer 23 von XYZ ist unbekannt
+Spieler Nummer 11 von A ist unbekannt
+]!
+
+[[Testsystem][<BasketballScouting.CoffeScriptSuite.PraesentatioN.MannschaftsAufstellung]]
+
+${END_SLIDE}
+${END_SLIDES}
