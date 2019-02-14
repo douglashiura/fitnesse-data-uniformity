@@ -1,0 +1,10 @@
+| selenium |
+| ensure | open | http://google.com |
+| ensure | open window | https://github.com/andreptb |
+| note | should still be in Google Window |
+| check | title | Google |
+| ensure | select window | https://github.com/andreptb |
+| check | text | css=.vcard-username | andreptb |
+| ensure | close browser tab |
+| select window | =~/https://www.google.com.+/ |
+| ensure | present | id=lst-ib |

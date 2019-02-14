@@ -1,0 +1,6 @@
+| selenium |
+| ensure | open | http://github.com |
+| click | link=Sign up | 
+| ensure | present | id=user_login |
+| go back |
+| reject | present | id=user_login |
