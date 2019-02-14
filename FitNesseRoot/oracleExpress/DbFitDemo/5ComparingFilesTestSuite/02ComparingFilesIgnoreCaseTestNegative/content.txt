@@ -1,0 +1,8 @@
+!define REMOTE_DEBUG_COMMAND {java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8066 -cp %p %m}
+
+!path lib/*.jar
+!|com.capgemini.fitnesseplugin.filecomparator.FileComparatorFixture  |
+|pathFile1                 |pathFile2                      |areEqualIgnoreCase?|
+|FitNesseRoot\DbFitDemo\TestFiles\compare_files\testFile.dat|FitNesseRoot\DbFitDemo\TestFiles\compare_files\testFileCase.dat |true               |
+|FitNesseRoot\DbFitDemo\TestFiles\compare_files\testFile.dat|FitNesseRoot\DbFitDemo\TestFiles\compare_files\testFileWrong.dat|false              |
+|FitNesseRoot\DbFitDemo\TestFiles\compare_files\testFile.dat|FitNesseRoot\DbFitDemo\TestFiles\compare_files\testFileWrong.dat|true               |

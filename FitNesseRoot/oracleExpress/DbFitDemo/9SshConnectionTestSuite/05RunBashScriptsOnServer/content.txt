@@ -1,0 +1,7 @@
+!path lib/*.jar
+!define localtarget {C:\fitnesse\fitnesse.server\FitNesseRoot\DbFitDemo\TestFiles\InOut\}
+
+!| com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture |
+| runCommand | RUNSSHCOMMAND "/home/admin/scripts/parser.sh good_one" |
+| runCommand | RUNSSHCOMMAND "/home/admin/scripts/parser.sh bad_one" |
+| runCommand | RUNSSHCOMMAND "/home/admin/scripts/parser.sh" |

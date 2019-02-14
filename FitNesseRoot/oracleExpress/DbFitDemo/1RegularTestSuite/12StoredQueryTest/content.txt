@@ -1,0 +1,33 @@
+!path lib/*.jar
+!|dbfit.OracleTest              |
+!|Connect using file|DatabaseConnection.config|
+
+#Creating test table
+
+!|Execute|Create table Test_Tab(last_name varchar(50), employee_id int)|
+
+#Inserting test data into test table
+
+!|Insert|Test_Tab|
+|last_name   |employee_id |
+|Khoo        |115         |
+
+
+#|example query|parameter which has result of query|
+
+!|Store Query |select employee_id from Test_Tab where last_name='Khoo' |id |
+!|Store Query |select employee_id from Test_Tab where last_name='Khoo' |id2|
+
+#'<<id' means 'select employee_id from Test_Tab where last_name='Khoo''
+!|Query|<<id|
+|employee_id|
+|115        |
+
+#Comparing two queries, test is going to be success when results of queries are exactly the same
+!|compare stored queries|id|id2|
+|employee_id?                  |
+
+#Dropping test table after test
+
+!|Execute|Drop table Test_Tab|
+

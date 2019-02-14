@@ -1,0 +1,17 @@
+!path lib/*.jar
+
+|dbfit.OracleTest|
+
+|Connect|localhost:1521|utp|utp|xe|
+
+!| Execute Procedure Expect Exception|count_year_salary|1234|
+|empl_id                             |?                     |
+|50                                  |                      |
+|0                                   |                      |
+|-10                                 |                      |
+
+!| Execute Procedure|count_year_salary|
+|empl_id            |?                |
+|103                |10               |
+|104                |20               |
+|100                |30               |

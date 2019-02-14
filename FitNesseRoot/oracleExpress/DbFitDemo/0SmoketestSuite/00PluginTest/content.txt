@@ -1,0 +1,14 @@
+Plugin test
+
+!path lib/*.jar
+
+!note 'dbfit-oracle-3.2.0.jar'
+!|dbfit.OracleTest|
+
+!note 'FitnessePlugin-1.0-SNAPSHOT.jar'
+!|com.capgemini.fitnesseplugin.db.ExtendedOracleTest|
+
+!note 'CommandLineFixture.jar'
+!|com.objectmentor.fixtures.CommandLineFixture|  
+
+

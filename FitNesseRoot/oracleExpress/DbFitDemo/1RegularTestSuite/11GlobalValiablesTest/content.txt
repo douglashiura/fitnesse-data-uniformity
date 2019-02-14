@@ -1,0 +1,25 @@
+!path lib/*.jar
+!|dbfit.OracleTest              |
+!|Connect using file|DatabaseConnection.config|
+
+#Creating simple function which summarizes two values
+!|Execute|CREATE OR REPLACE FUNCTION summarizeTwo(a number, b number) RETURN NUMBER IS result NUMBER; BEGIN result:=a + b; RETURN result; END;|
+
+#Executing above function with global variables --> ${v1}, ${v2}, ${v3}
+#|parameter|parameter|expected value|
+
+!|Execute Procedure|summarizeTwo|
+|a                 |b   |?      |
+|${v1}             |2   |22     |
+|${v2}             |3   |13     |
+|11                |4   |${v3}  |
+|4                 |5   |9      |
+
+#Query with global parameter which are results of queries
+!|query|${v4} UNION ${v5}|
+|last_name               |
+|Alpha                    |
+|Omega                 |
+
+#Dropping function after test
+!|Execute|Drop function summarizeTwo|

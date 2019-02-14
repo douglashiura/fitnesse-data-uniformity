@@ -1,0 +1,14 @@
+!define REMOTE_DEBUG_COMMAND {java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8066 -cp %p %m }
+
+!path lib/*.jar
+
+!|com.capgemini.fitnesseplugin.csvcomparator.CSVComparatorView              |
+
+!|Set reference options| !-SEPARATOR:;%ESCAPE_CHAR:/%KEY_COLUMNS:LEVEL;COL2%COMPARE_C0LUMNS:COL5;COL6;STR1;RAND1-! |
+!|Set source options | !-SEPARATOR:;%ESCAPE_CHAR:/%KEY_COLUMNS:LEVEL;COL2%COMPARE_C0LUMNS:COL5;COL6;STR1;RAND1-! |
+!|Set output path | FitNesseRoot\exports\CSVCompareResult |
+
+!|compareCSVs|
+|FitNesseRoot\DbFitDemo\TestFiles\compare_files\file_to_compare_REF.csv |FitNesseRoot\DbFitDemo\TestFiles\compare_files\file_to_compare_SRC_matching.csv |MATCH|true |
+|FitNesseRoot\DbFitDemo\TestFiles\compare_files\file_to_compare_REF.csv |FitNesseRoot\DbFitDemo\TestFiles\compare_files\file_to_compare_SRC_not_matching.csv |MATCH|true |
+|FitNesseRoot\DbFitDemo\TestFiles\compare_files\file_to_compare_REF.csv |FitNesseRoot\DbFitDemo\TestFiles\compare_files\file_to_compare_SRC_missing_column.csv |MATCH|true |

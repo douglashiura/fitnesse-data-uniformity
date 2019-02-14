@@ -1,0 +1,32 @@
+!path lib/*.jar
+|dbfit.OracleTest||
+
+|Connect|localhost:1521|utp|utp|xe|
+
+----
+!| Execute Procedure  |utPLSQL.test|
+|package_in           |recompile_in|
+|count_annual_earnings|false       |
+
+!| Execute|Create or replace view utr_outcome_fitnesse as select status, description, case when status='FAILURE' then description else ' ' end fail_description from UTP.UTR_OUTCOME where run_id in (select max(run_id) from UTP.UTR_OUTCOME)|
+
+!| Store query|select * from utr_outcome_fitnesse|last_tests_query|
+
+----
+!| Execute Ddl|Create table table_to_compare as select status, description as fail_description  from UTP.UTR_OUTCOME where run_id in (select max(run_id) from UTP.UTR_OUTCOME)|
+
+!| Execute|UPDATE table_to_compare SET STATUS='SUCCESS' where STATUS IS NOT NULL|
+
+!| Execute|UPDATE table_to_compare SET fail_description  = ' ' where fail_description IS NOT NULL|
+
+!| Store Query|SELECT * from table_to_compare|table_to_compare_query|
+
+----
+!| compare stored queries|table_to_compare_query|last_tests_query|
+|STATUS?                 |fail_description?                      |
+
+!| Inspect Query|select description, status from UTP.UTR_OUTCOME where run_id = (select * from (select run_id from UTP.UTR_OUTCOME order by run_id desc) where rownum=1)|
+
+!| Execute Ddl|drop table table_to_compare|
+
+!| Execute Ddl|drop view utr_outcome_fitnesse|

@@ -1,0 +1,10 @@
+!path lib/*.jar
+!|dbfit.OracleTest|
+!|Connect using file|DatabaseConnection.config|
+
+!|Execute|Create or replace procedure test_proc (result OUT varchar2) is begin result:='Test Procedure'; end test_proc;|
+
+!|Execute Procedure|test_proc|
+|result?|
+|Test Procedure|
+

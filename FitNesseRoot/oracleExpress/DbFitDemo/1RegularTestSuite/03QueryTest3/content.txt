@@ -1,0 +1,17 @@
+!path lib/*.jar
+!|dbfit.OracleTest                                         |
+!|Connect using file|DatabaseConnection.config|
+#Encrypt utility that ships with DbFit to encrypt the password.
+#Encrypt is provided both as a shell script (encrypt.sh) and a Windows batch file (encrypt.bat)
+
+#1. Encrypt your password: encrypt.sh your-password-here
+#2. A new keystore is created when encrypt is invoked for the first time--> $HOME/.dbfit.jks
+#3. Copy the encrypted string ( ENC(jzDH1fYetwCp3JFfAeKebA==) ) into the database connection (string or file). 
+#4. No change is needed in the DbFit tests - the ConnectUsingFile and Connect fixtures work with both encrypted and non-encrypted passwords
+
+#More: http://dbfit.github.io/dbfit/docs/dbfit-features.html#database-password-encryption
+
+#Simple query from dual table
+!|Query|select 'test' as x from dual|
+|x                                  |
+|test                               |

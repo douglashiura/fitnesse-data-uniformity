@@ -1,0 +1,31 @@
+!path lib/*.jar
+
+
+
+'''When we start test with external file we must precede path to file with "-m"'''
+
+Command file should be located in defined path
+!define pathtofile {C:\fitnesse\fitnesse.server\FitNesseRoot\DbFitDemo\TestFiles\TextFiles\}
+
+'''File with single command:'''
+
+|com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture|
+|runCommand          |RUNSSHCOMMAND "-m ${pathtofile}01SingleCommand.txt"         |
+
+
+'''File with multiple commands:'''
+
+|com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture|
+|runCommand          |RUNSSHCOMMAND "-m ${pathtofile}02MultiCommand.txt"         |
+
+
+'''File with multiple commands(with errors):'''
+
+|com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture|
+|runCommandExpectReturnCode |RUNSSHCOMMAND "-m ${pathtofile}03MultiCommandErrors.txt"       |127|
+
+
+'''File doesn't exist:'''
+
+|com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture|
+|runCommandExpectReturnCode |RUNSSHCOMMAND "-m ${pathtofile}idontexist.txt"        |1|

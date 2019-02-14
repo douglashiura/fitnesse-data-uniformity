@@ -1,0 +1,8 @@
+!path lib/*.jar
+!|dbfit.OracleTest|
+!|Connect using file|DatabaseConnection.config|
+
+
+#Creating test table Test
+!|Execute|CREATE TABLE Test(id number, name varchar2(20))|
+

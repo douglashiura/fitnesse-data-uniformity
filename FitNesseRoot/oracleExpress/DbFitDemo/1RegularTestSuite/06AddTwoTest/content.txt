@@ -1,0 +1,22 @@
+!path lib/*.jar
+!|dbfit.OracleTest              |
+!|Connect using file|DatabaseConnection.config|
+
+#Creating simple function which increments value by 2
+
+!|Execute|CREATE OR REPLACE FUNCTION addTwo(a number) RETURN NUMBER IS result NUMBER; BEGIN result:=a + 2; RETURN result;END;|
+
+#Executing above procedure
+#|parameter|expected value|
+
+!|Execute Procedure|addTwo|
+|a                 |?     |
+|1                 |3     |
+|2                 |4     |
+|3                 |5     |
+|4                 |6     |
+|1                 |3     |
+|6                 |8     |
+
+#Dropping procedure after test
+!|Execute|Drop function addTwo|

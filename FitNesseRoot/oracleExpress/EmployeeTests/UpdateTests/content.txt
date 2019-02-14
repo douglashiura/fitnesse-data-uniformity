@@ -1,0 +1,21 @@
+!path lib/*.jar
+!define TEST_SYSTEM {slim}
+!|dbfit.OracleTest|
+
+!|Connect|localhost:1521|utp|utp|xe|
+
+|insert     |employees                                                                                         |
+|employee_id|first_name|last_name|email         |phone_number|job_id|salary|manager_id|department_id|hire_date |
+|99         |Przemek   |Wojtkow  |mail@mail.com |123.456.7899|AD_VP |54000 |11        |60           |2016-10-01|
+|10         |Rafał     |Kowalski |mail2@mail.com|133.416.3339|AD_VP |5000  |16        |60           |2016-10-01|
+|11         |Michał    |Nowak    |mail3@mail.com|13.46.78    |AD_VP |540   |11        |60           |2016-10-01|
+|12         |Piotr     |Wojtków  |mail4@mail.com|123.456.7899|AD_VP |8600  |41        |60           |2016-10-01|
+|13         |Paweł     |Patronik |mail5@mail.com|123.456.7899|AD_VP |59900 |671       |60           |2016-10-01|
+
+|update     |employees  |
+|last_name= |employee_id|
+|Miaśkiewicz|99         |
+
+|query      |select employee_id, first_name, last_name, email from employees where employee_id = 99|
+|employee_id|first_name                 |last_name                   |email                        |
+|99         |Przemek                    |Miaśkiewicz                 |mail@mail.com                |

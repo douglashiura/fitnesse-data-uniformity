@@ -1,0 +1,29 @@
+!path lib/*.jar
+
+based on examples from http://fit.c2.com/files/CommandLineFixture/CommandLineFixture.java
+CommandLineFixture sources: http://fit.c2.com/files/CommandLineFixture/CommandLineFixture.java 
+|com.objectmentor.fixtures.CommandLineFixture|                                                   
+|title|sample test|
+|verbose|
+
+test #1 - parse result of command if contains named string
+|com.objectmentor.fixtures.CommandLineFixture|                                                   
+|spawn|./FitNesseRoot/DbFitDemo/TestFiles/BatchFiles/hello.world.bat|hw|
+|find|hw.stdout|Hello|
+
+Test #2 negative test - no string found
+|com.objectmentor.fixtures.CommandLineFixture|                                                   
+|spawn|./FitNesseRoot/DbFitDemo/TestFiles/BatchFiles/hello.world.bat|hw3|
+|find|hw3.stdout|He11o world|
+
+Test #2 negative test - no string found
+|com.objectmentor.fixtures.CommandLineFixture|                                                   
+|spawn|./FitNesseRoot/DbFitDemo/TestFiles/BatchFiles/hello.world.1.return.bat|hwRet1|
+|find|hwRet1.stdout|Hello World|
+
+
+Test #3 run shell command like dir, requires using pattern cmd.exe /C <command to run>
+|com.objectmentor.fixtures.CommandLineFixture|                                                   
+|spawn|cmd.exe /C dir c:\P*|dirCmd|
+|waitFor|dirCmd|
+|find|dirCmd.stdout|c:|

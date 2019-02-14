@@ -1,0 +1,29 @@
+!path lib/*.jar
+!|dbfit.OracleTest              |
+!|Connect using file|DatabaseConnection.config|
+
+#Creating test table
+
+!|Execute|Create table Test_Tab(name varchar(50), id int)|
+
+#Inserting test data into test table
+
+!|Insert|Test_Tab|
+|name   |id      |
+|ania   |1       |
+
+#Updating test data
+
+!|Update|Test_Tab|
+|name=  |id      |
+|ala    |1       |
+
+#Query with expected values
+
+!|Query|Select * from Test_Tab|
+|name  |id                    |
+|ala   |1                     |
+
+#Dropping test table after test
+
+!|Execute|Drop table Test_Tab|

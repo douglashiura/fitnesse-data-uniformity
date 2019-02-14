@@ -1,0 +1,24 @@
+!path lib/*.jar
+!|dbfit.OracleTest|
+!|Connect using file|DatabaseConnection.config|
+
+#Creating test table
+!|Execute|create table tab_with_trigger(x int)|
+
+
+#Creating test trigger on above table
+!|Execute ddl|create or replace trigger trg_double_x before insert on tab_with_trigger for each row begin :new.x := :new.x * 2; end;|
+
+
+#Inserting test value into above table
+!|Insert|tab_with_trigger|
+|x                       |
+|2                       |
+
+#Query with expected values - result from trigger 
+!|Query|select x from tab_with_trigger|
+|x                                    |
+|4                                    |
+
+#Dropping table after test
+!|Execute|drop table tab_with_trigger|

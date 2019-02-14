@@ -1,0 +1,47 @@
+!contents -R2 -g -p -f -h
+!3 Custom Plugin Usage
+Copy !-FitnessePlugin-1.0-SNAPSHOT.jar-! into DBFit /lib directory
+
+!3 Custom Plugin Implementation Notes
+1. The !-DBFit-! main test class for Oracle database was extended in our custom plugin 
+
+{{{class ExtendedOracleTest extends OracleTest}}}
+
+2. The custom class contains methods that can be used strictly on the Test page.
+
+E.g.
+
+{{{public Fixture executeSqlScriptExpectException(String inputFolder)}}}can be used in test as
+
+!| Execute Anonymous Procedure From File Expect Exception |
+
+3. File provided in the test is read till first occurrence of slash / character.
+
+!3 Debugging from Spring Tool Suite
+1. Install FitNesse Plugin for eclipse - http://fitnesse-eclipse.github.io/
+
+2. In STS/eclipse add general settings
+
+Preferences->FitNesse
+
+Host: http://localhost:8085/
+
+Root Directory: !-FitNesseRoot-!
+
+3. In FitNesse test page add directive
+
+{{{!define COMMAND_PATTERN {java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=1044 -cp %p %m}}}
+
+4. Append at the end of test URL 
+
+{{{?responder=test&remote_debug=true}}}
+
+5. Test will hang and wait.
+
+6. In STS/eclipse start remote debugging
+
+Debug Configuration -> Remote Java Application -> New
+
+Host: localhost
+
+Port: 1044

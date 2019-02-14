@@ -1,0 +1,16 @@
+!path lib/*.jar
+!|dbfit.OracleTest|
+!|Connect using file|DatabaseConnection.config|
+
+
+!|Execute|CREATE TABLE emp(id number, name varchar2(20))|
+
+|com.objectmentor.fixtures.CommandLineFixture|                                                   
+|command| ./FitNesseRoot/DbFitDemo/testfiles/batchfiles/insert.bat|
+
+#Checking if data are inserted
+!|Query|select * from emp|
+|id|name|
+|1 |Jan |
+
+!|Execute|DROP TABLE emp|

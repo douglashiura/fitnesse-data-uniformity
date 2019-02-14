@@ -1,0 +1,15 @@
+!path lib/*.jar
+!|dbfit.OracleTest              |
+!|Connect using file|DatabaseConnection.config|
+
+!|Insert|Test |
+|id     |name |
+|1      |Anna |
+|2      |Jan  |
+|3      |Zofia|
+
+!|Query|select * from Test|
+|id    |name              |
+|1     |Anna              |
+|2     |Jan               |
+|3     |Zofia             |

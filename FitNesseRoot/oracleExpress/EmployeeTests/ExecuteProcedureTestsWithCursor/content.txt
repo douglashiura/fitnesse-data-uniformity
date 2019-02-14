@@ -1,0 +1,14 @@
+!path lib/*.jar
+|dbfit.OracleTest|
+
+|Connect|localhost:1521|utp|utp|xe|
+
+
+|Execute Procedure|count_rich_employee|
+|min_salary       |?                  |
+|8000             |33                 |
+|10000            |15                 |
+|5000             |58                 |
+|100000           |0                  |
+
+

@@ -1,0 +1,6 @@
+!path lib/*.jar
+
+Run script that is defined behind command.WORKFLOW property in config.properties
+|com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture|                                                   
+|runCommand| WORKFLOW  my_param1 my_param2 |
+

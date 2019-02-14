@@ -1,0 +1,19 @@
+All the tests below are executed in connection of database Oracle 11g, HR Schema.
+
+!contents -R2 -g -p -f -h
+!define TEST_SYSTEM {slim}
+!****** <
+Global variables - it's possible to use these values in each test in this StaticPage
+
+#defining values to global variables
+Variable could be signle value...
+
+!define v1 {20}
+!define v2 {10}
+!define v3 {15}
+
+... or result from a query
+!define v4 {SELECT 'Alpha' last_name FROM DUAL}
+!define v5 {SELECT 'Omega' last_name FROM DUAL}
+
+******!

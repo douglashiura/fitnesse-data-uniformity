@@ -1,0 +1,11 @@
+!path lib/*.jar
+!|dbfit.OracleTest|
+!|Connect using file|DatabaseConnection.config|
+
+!|Execute|create or replace procedure test_proc (foo in varchar2) is begin RAISE_APPLICATION_ERROR(-20001, 'test error'); end test_proc;|
+
+
+!|Execute Procedure expect exception|test_proc|20001|
+|foo     |
+|aaa     |
+

@@ -1,0 +1,8 @@
+!define TEST_SYSTEM {slim}
+!path lib/*.jar
+!|dbfit.OracleTest              |
+!|Connect using file|DatabaseConnection.config|
+
+!|Query|select 'test' as x from dual|
+|x                                  |
+|test                               |

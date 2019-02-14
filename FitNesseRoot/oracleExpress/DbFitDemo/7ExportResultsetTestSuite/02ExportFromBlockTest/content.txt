@@ -1,0 +1,41 @@
+!path lib/*.jar
+!|com.capgemini.fitnesseplugin.db.ExtendedOracleTest              |
+#!|Connect using file|DatabaseConnection.config|
+!|Connect using file|DatabaseConnection.config|
+
+
+Single Statement
+!| export sql result set block to file |null|.\FitNesseRoot\exports|
+|Select * from User_Tab_Columns| test.01.single.statement.csv| 
+|Select Table_Name, Column_Name from User_Tab_Columns| test.02.single.statement.csv| 
+|!-Select Table_Name,Tablespace_Name from User_Tables
+union all
+Select Table_Name,Tablespace_Name  from User_Tables -!| test.03.single.statement.union.csv| 
+|!-Select Table_Name,Tablespace_Name  from User_Tables
+minus
+Select Table_Name,Tablespace_Name from User_Tables -!| test.04.single.statement.minus.csv| 
+| Select A.Column_Name from User_Tab_Columns, User_Tab_Columns A where rownum <100000 |test.05.single.statement.rownum.csv     |
+|!-
+With Main as
+--comment
+(
+  Select 
+  Table_Name, 
+  Column_Id,
+  max(Column_id) over (partition by Table_Name) Max_Pos
+  from User_Tab_Columns
+)
+Select * from Main where Column_Id = Max_Pos
+union all
+Select * from Main where Column_Id = Max_Pos
+/-!|test.06.single.statement.lastcol.csv|
+
+
+Multi Statements
+One input statement = one ouput file
+
+!| export sql result set block to file |null|.\FitNesseRoot\exports|
+|!- Select * from User_Tab_Columns
+/
+Select * from User_Tables
+/-!| test.11.multi_select.csv     |

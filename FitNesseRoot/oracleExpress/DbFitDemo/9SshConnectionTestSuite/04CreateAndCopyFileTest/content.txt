@@ -1,0 +1,32 @@
+!path lib/*.jar
+!define localtarget {C:\GIT\fitnesse\fitnesse.server\FitNesseRoot\DbFitDemo\TestFiles\InOut\}
+
+Create folder on server
+
+!| com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture |
+| runCommand | RUNSSHCOMMAND "mkdir /home/admin/test/suite9" |
+| runCommand | RUNSSHCOMMAND "ls -l /home/admin/test "|
+
+
+Create files on server
+!| com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture |
+| runCommand | RUNSSHCOMMAND "ls -l /home/admin/test/suite9" |
+| runCommand | RUNSSHCOMMAND "ls -a /bin/>/home/admin/test/suite9/file01.txt"|
+| runCommand | RUNSSHCOMMAND "ls -l /bin/>/home/admin/test/suite9/file02.txt"|
+| runCommand | RUNSSHCOMMAND "ls -a /home/admin/test/suite9" |
+
+Copy file to target folder
+!| com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture |
+| runCommand | DIR|
+| runCommand | RUNSSHCOPYFILE "1" "/home/admin/test/suite9/file01.txt" "${localtarget}"|
+| runCommand | RUNSSHCOPYFILE "1" "/home/admin/test/suite9/file02.txt" "${localtarget}"|
+
+
+Check copied files
+!| com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture |
+| runCommand | DIR|
+
+Drop folder from server
+
+| com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture |
+| runCommand | RUNSSHCOMMAND "rm -rf /home/admin/test/suite9" |

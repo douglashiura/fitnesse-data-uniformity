@@ -1,0 +1,31 @@
+!path lib/*.jar
+!|com.capgemini.fitnesseplugin.db.ExtendedOracleTest              |
+!|Connect using file|DatabaseConnection.config|
+
+Drop table if exists
+!|Execute| !- declare 
+c int; 
+ begin   select count(*) into c from user_tables where upper(table_name) = upper('test_emp');
+ if c = 1 then     
+          execute immediate 'drop table test_emp'; 
+end if; 
+end; -!|
+
+
+!| execute sql script | FitNesseRoot\DbFitDemo\TestFiles\SQLFiles\suite_6 |
+| test.02.single.command.create.table.emp.sql      |
+
+Error occur 
+!| execute sql script expect exception | .\FitNesseRoot\DbFitDemo\TestFiles\SQLFiles\suite_6 |
+| test.61.plsqlblock.single.syntax.error.ORA_06550.sql               |
+| test.62.plsqlblock.double.withoutslash.ORA_06550.sql               |
+| test.63.plsqlblock.application.error.20001.sql                     |
+| test.64.plsqlblock.application.error.20002.sql                     |
+| test.65.sqlblock.single.insert.command.with.semicolon.sql          |
+| test.66.plsqlblock.single.with.double.slashes.empty.lines.sql      |
+
+!-
+Error didn't occur 
+!| execute sql script expect exception | .\FitNesseRoot\DbFitDemo\TestFiles\SQLFiles\suite_6 |
+| test.41.plsqlblock.single.sql               |
+-!

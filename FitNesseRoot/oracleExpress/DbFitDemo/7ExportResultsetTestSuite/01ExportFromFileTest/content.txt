@@ -1,0 +1,17 @@
+define REMOTE_DEBUG_COMMAND {java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8066 -cp %p %m}
+
+!path lib/*.jar
+!|com.capgemini.fitnesseplugin.db.ExtendedOracleTest              |
+!|Connect using file|DatabaseConnection.config|
+
+
+!|export sql result set script to file | FitNesseRoot\DbFitDemo\TestFiles\SQLFiles\suite_7 | FitNesseRoot\exports |
+| test03SingleBlockWithMultilineLineCommentBeforeAndAfter.sql|test03SingleBlockWithMultilineLineCommentBeforeAndAfter.csv|
+| test021SingleBlockWithSingleLineCommentAfter.sql           |test021SingleBlockWithSingleLineCommentAfter.csv           |
+| test022SingleBlockWithSingleLineCommentBefore.sql          |test022SingleBlockWithSingleLineCommentBefore.csv          |
+| test023SingleBlockWithSingleLineCommentBeforeAndAfter.sql  |test023SingleBlockWithSingleLineCommentBeforeAndAfter.csv  |
+| test11SingleBlockWithScriptDelimiter.sql                   |test11SingleBlockWithScriptDelimiter.csv                   |
+| test12SingleBlockWithScriptDelimiterAndEmptyLines.sql      |test12SingleBlockWithScriptDelimiterAndEmptyLines.csv      |
+| test21DoubleBlockWithScriptDelimiter.sql                   |test21DoubleBlockWithScriptDelimiter.csv                   |
+| test31SingleBlockWithMultipleColumns.sql                   |test31SingleBlockWithMultipleColumns.csv                   |
+

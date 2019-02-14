@@ -1,0 +1,14 @@
+!path lib/*.jar
+!|dbfit.OracleTest|
+!|Connect using file|DatabaseConnection.config|
+
+!|Execute|create or replace procedure test_proc (foo in varchar2, bar in varchar2, result out varchar2) is begin result:= concat(foo, bar); end test_proc;|
+
+
+!|Execute Procedure|test_proc|
+|foo     |bar      |result?  |
+|aaa     |bbb      |aaabbb   |
+|xxx     |yyy      |xxxyyy   |
+
+
+

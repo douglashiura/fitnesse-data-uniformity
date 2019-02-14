@@ -1,0 +1,42 @@
+!path lib/*.jar
+!|dbfit.OracleTest               |
+!|Connect using file|DatabaseConnection.config|
+
+#Setting values to parameter to function below
+|Set parameter|a|3|
+|Set parameter|b|7|
+
+#Creating simple function which summarizes two values
+!|Execute|CREATE OR REPLACE FUNCTION summarizeTwo(a number, b number) RETURN NUMBER IS result NUMBER; BEGIN result:=a + b; RETURN result; END;|
+
+#Executing above function
+#|parameter|parameter|expected value|
+#<< - reads value from parameter
+#>> - saves value into another parameter
+
+
+!|Execute Procedure|summarizeTwo|
+|a                 |b  |?       |
+|<<a               |<<b|>>result|
+
+#Creating test table
+
+!|Execute|CREATE TABLE test (x number)|
+
+#Inserting test data into test table
+
+!|Insert|test|
+|x           |
+|<<result    |
+
+#Query with expected value
+
+!|Query|select * from test|
+|x                        |
+|<<result                 |
+
+#Dropping function after test
+!|Execute|Drop function summarizeTwo|
+
+#Dropping table after test
+!|Execute|Drop table test|

@@ -1,0 +1,8 @@
+1. [[Simple update test using query on Oracle Express DB][http://localhost:8085/EmployeeTests.UpdateTests]]
+
+2. [[Simple function execution test on Oracle Express DB][http://localhost:8085/EmployeeTests.ExecuteProcedureTests]]
+
+3. [[Simple function execution test using cursor on Oracle Express DB][http://localhost:8085/EmployeeTests.ExecuteProcedureTestsWithCursor]]
+
+4. [[Simple test using already wrote utPLSQL test on Oracle Express DB][http://localhost:8085/EmployeeTests.ExecuteTestFromUtPLSQL]]
+!define TEST_SYSTEM {slim}

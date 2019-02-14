@@ -1,0 +1,30 @@
+!path lib/*.jar
+!|com.capgemini.fitnesseplugin.db.ExtendedOracleTest              |
+!|Connect using file|DatabaseConnection.config|
+
+Drop table if exists
+!|Execute| !- declare 
+c int; 
+ begin   select count(*) into c from user_tables where upper(table_name) = upper('test_emp');
+ if c = 1 then     
+          execute immediate 'drop table test_emp'; 
+end if; 
+end; -!|
+
+!| execute sql script | FitNesseRoot\DbFitDemo\TestFiles\SQLFiles\suite_6 |
+| test.02.single.command.create.table.emp.sql      |
+
+
+running inserts into temp_emp table
+!| execute sql script | FitNesseRoot\DbFitDemo\TestFiles\SQLFiles\suite_6 |
+| test.31.sqlblock.single.insert.command.with.comments.sql           |
+| test.32.sqlblock.single.insert.command.with.multiline.comments.sql |
+
+there should be two values inserted
+!|Query | select ID, Description from test_emp |
+|ID|
+|1|
+|2|
+
+
+!|Execute| drop table test_emp |

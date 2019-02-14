@@ -1,0 +1,17 @@
+!path lib/*.jar
+!|dbfit.OracleTest|
+!|Connect using file|DatabaseConnection.config|
+
+!|Execute|CREATE TABLE emp(id number, name varchar2(20))|
+
+#Running script that runs sqlloader that insert test data into emp table, relies on setting start working directory
+|com.objectmentor.fixtures.CommandLineFixture|                                                   
+|command|./FitNesseRoot/DbFitDemo/TestFiles/BatchFiles/loader.bat|
+
+
+#Checking if data are inserted
+!|Query|select * from emp|
+|id|name|
+|1 |Jan |
+
+!|Execute|DROP TABLE emp|

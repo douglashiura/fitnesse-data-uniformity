@@ -1,0 +1,11 @@
+DECLARE
+  l_cnt number := 0;
+  l_param varchar2(4000) := '--PARAMETER--';
+BEGIN
+  select count(*) into l_cnt 
+  from test_emp where Description like '%' || l_param || '%';
+  
+  IF l_cnt <> 0 THEN
+    Raise_Application_Error (-20001, 'Row with value: ' || l_param || ' not found');
+  END IF;
+end;

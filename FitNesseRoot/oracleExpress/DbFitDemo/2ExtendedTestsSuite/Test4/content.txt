@@ -1,0 +1,16 @@
+!path lib/*.jar
+!|dbfit.OracleTest              |
+!|Connect using file|DatabaseConnection.config|
+
+!|Execute ddl|create or replace trigger trg_double_x before insert on Test for each row begin :new.id := :new.id * 2; end;|
+
+
+#Inserting test value into above table
+!|Insert|Test|
+|id     |name|
+|1      |Anna|
+
+#Query with expected values - result from trigger 
+!|Query|select id from Test|
+|id                        |
+|2                         |

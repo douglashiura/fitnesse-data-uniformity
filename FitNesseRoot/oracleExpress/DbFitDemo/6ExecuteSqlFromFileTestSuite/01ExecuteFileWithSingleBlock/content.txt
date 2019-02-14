@@ -1,0 +1,34 @@
+!path lib/*.jar
+!|com.capgemini.fitnesseplugin.db.ExtendedOracleTest              |
+!|Connect using file|DatabaseConnection.config|
+
+Drop table if exists
+!|Execute| !- declare 
+c int; 
+ begin   select count(*) into c from user_tables where upper(table_name) = upper('test_emp');
+ if c = 1 then     
+          execute immediate 'drop table test_emp'; 
+end if; 
+end; -!|
+
+!-
+Test: create new empty table using single sql line command (create table) there is ; at the end
+!| execute sql script | FitNesseRoot\DbFitDemo\TestFiles\SQLFiles\suite_6 |
+| test.01.single.command.create.table.with.error.sql      |
+
+!|Query | select count(column_name) COULUMN_QTY from all_tab_cols where owner ='HR' and table_name ='TEST_EMP' |
+|COULUMN_QTY|
+|0|
+-!
+
+Test: create new empty table using single sql line command (create table) there is no ; at the end
+!| execute sql script | FitNesseRoot\DbFitDemo\TestFiles\SQLFiles\suite_6 |
+| test.02.single.command.create.table.emp.sql      |
+
+!|Query | select column_name from user_tab_cols where table_name ='TEST_EMP' |
+|COLUMN_NAME|
+|ID|
+|DESCRIPTION|
+
+
+!|Execute| drop table test_emp |

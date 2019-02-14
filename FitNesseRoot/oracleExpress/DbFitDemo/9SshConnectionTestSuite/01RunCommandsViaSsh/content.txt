@@ -1,0 +1,15 @@
+!path lib/*.jar
+'''Simple Command:'''
+
+| com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture |
+| runCommand | RUNSSHCOMMAND "ls -l /home/admin/test" |
+
+'''Simple Command (with small misprint):'''
+
+| com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture |
+| runCommandExpectReturnCode| RUNSSHCOMMAND  "lss -l /home/admin/test" |127|
+
+'''Simple Command (without parameters):'''
+
+| com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture |
+| runCommandExpectReturnCode| RUNSSHCOMMAND |1|

@@ -1,0 +1,22 @@
+!path lib/*.jar
+!|dbfit.OracleTest               |
+!|Connect using file|DatabaseConnection.config|
+
+#Creating simple function which divides two values
+
+!|Execute|create or replace FUNCTION divideTwo(a number, b number) RETURN NUMBER IS result NUMBER; BEGIN result:= a / b; RETURN result; END;|
+
+#Executing above procedure
+#|parameter|parameter|expected value|
+#'Expect Exception' means that we know that exception is going to appear
+
+#We can specify an optional exception code as the third argument
+
+!|Execute Procedure Expect Exception|divideTwo|1476|
+|a                                  |b   |?   |
+|2                                  |0   |0   |
+|3                                  |0   |0   |
+|4                                  |0   |0   |
+
+#Dropping procedure after test
+!|Execute|Drop function divideTwo|

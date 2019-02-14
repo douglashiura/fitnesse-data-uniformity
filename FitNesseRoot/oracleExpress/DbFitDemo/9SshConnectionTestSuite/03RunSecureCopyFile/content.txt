@@ -1,0 +1,29 @@
+!path lib/*.jar
+!define localtarget {C:\GIT\fitnesse\fitnesse.server\FitNesseRoot\DbFitDemo\TestFiles\InOut\}
+
+Input parameters:
+first par: copying direction: "1" from server, "2" to server, other values=> invoke errors
+second par: source file path
+third par: target file path
+
+'''Copy from server (success):'''
+
+|com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture|
+|runCommand          |RUNSSHCOPYFILE "1" "/home/admin/scripts/file-lists.txt" "${localtarget}"|
+
+'''Copy from server (error):'''
+|com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture|
+|runCommandExpectReturnCode|RUNSSHCOPYFILE "1" "/home/admin/scripts/file-lists.txtc" "${localtarget}"| 1|
+
+'''Copy to server (success):'''
+|com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture|
+|runCommand          |RUNSSHCOPYFILE "2"  "${localtarget}file_01.txt" "/home/admin/scripts/"|
+
+'''Copy to server (error):'''
+|com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture|
+|runCommandExpectReturnCode|RUNSSHCOPYFILE "2"  "${localtarget}file_01.txtx" "/home/admin/scripts/"|1|
+
+'''Copy (wrong param value):'''
+|com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture|
+|runCommandExpectReturnCode|RUNSSHCOPYFILE "3"  "${localtarget}file_01.txtx" "/home/admin/scripts/"|99|
+

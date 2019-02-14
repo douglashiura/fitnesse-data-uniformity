@@ -1,0 +1,10 @@
+!path lib/*.jar
+
+|com.objectmentor.fixtures.CommandLineFixture|                                                   
+|command| ${PLINK_PATH}|
+
+|com.objectmentor.fixtures.CommandLineFixture|                                                   
+|command| ${PSCP_PATH}|
+
+| com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture |
+| runCommand | RUNSSHCOMMAND "echo Connection OK" |

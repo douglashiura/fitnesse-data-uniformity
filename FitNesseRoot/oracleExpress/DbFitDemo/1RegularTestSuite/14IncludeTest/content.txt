@@ -1,0 +1,6 @@
+!include 13ToIncludetest
+
+#Simple query from dual table
+!|Query|select 'test2' as x from dual|
+|x   |
+|test2|

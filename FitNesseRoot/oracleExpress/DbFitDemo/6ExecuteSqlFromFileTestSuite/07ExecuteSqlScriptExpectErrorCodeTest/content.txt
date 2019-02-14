@@ -1,0 +1,37 @@
+!path lib/*.jar
+!|com.capgemini.fitnesseplugin.db.ExtendedOracleTest              |
+!|Connect using file|DatabaseConnection.config|
+
+Drop table if exists
+!|Execute| !- declare 
+c int; 
+ begin   select count(*) into c from user_tables where upper(table_name) = upper('test_emp');
+ if c = 1 then     
+          execute immediate 'drop table test_emp'; 
+end if; 
+end; -!|
+
+
+!| execute sql script | FitNesseRoot\DbFitDemo\TestFiles\SQLFiles\suite_6 |
+| test.02.single.command.create.table.emp.sql      |
+
+Expect Error Code 911
+!|execute sql script expect exception|.\FitNesseRoot\DbFitDemo\TestFiles\SQLFiles\suite_4|911|
+|test.56.sqlblock.single.insert.command.with.semicolon.sql|
+
+Expect Error Code 17104
+!|execute sql script expect exception|.\FitNesseRoot\DbFitDemo\TestFiles\SQLFiles\suite_4|17104|
+|test.57.plsqlblock.single.with.double.slashes.empty.lines.sql|
+
+Expect Error Code 6550
+!|execute sql script expect exception|.\FitNesseRoot\DbFitDemo\TestFiles\SQLFiles\suite_4|6550|
+| test.51.plsqlblock.single.syntax.error.ORA_06550.sql |
+| test.52.plsqlblock.double.withoutslash.ORA_06550.sql |
+
+Expect Error Code 20001
+!|execute sql script expect exception|.\FitNesseRoot\DbFitDemo\TestFiles\SQLFiles\suite_4|20001|
+| test.54.plsqlblock.application.error.20001.sql       |
+
+Expect Error Code 20002
+!|execute sql script expect exception|.\FitNesseRoot\DbFitDemo\TestFiles\SQLFiles\suite_4|20002|
+| test.55.plsqlblock.application.error.20002.sql       |

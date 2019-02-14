@@ -1,0 +1,14 @@
+!path lib/*.jar
+!|dbfit.OracleTest              |
+!|Connect using file|DatabaseConnection.config|
+
+
+#Simple query from dual table
+!|Query|select 'test' as x from dual|
+|x                                  |
+|test                               |
+
+
+
+
+

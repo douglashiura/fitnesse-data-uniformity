@@ -1,0 +1,12 @@
+!path lib/*.jar
+
+Run script that is defined behind command.MAGICSCRIPT property in config.properties
+it returns first argument as the return code. 
+|com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture|                                                   
+| runCommand | MAGICSCRIPT 0 0_is_the_return_value |
+
+!define returnCode {20}
+this time, command returns exit code as ${returnCode},  that I also expected
+| com.capgemini.fitnesseplugin.commandlinefixture.CommandLineFixture|                                                   
+| runCommandExpectReturnCode | MAGICSCRIPT ${returnCode} two_is_the_return_value | ${returnCode} |
+

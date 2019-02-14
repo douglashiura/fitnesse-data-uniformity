@@ -1,0 +1,6 @@
+!path lib/*.jar
+!|dbfit.OracleTest|
+!|Connect using file|DatabaseConnection.config|
+
+#Dropping test table Test
+!|Execute|DROP TABLE Test|
