@@ -1,0 +1,50 @@
+!***> Load metadataGroupGroup to use in tests
+
+!| RecordEndpointFixture |
+| type | id | testReadRecordAndStoreJson? |
+| metadataGroup | metadataGroupGroup | |
+
+*!
+!***> Check children in metadataGroupGroup
+
+!| MetadataLinkFixture |
+| authToken | linkedRecordType | linkedRecordId | getRepeatMin? | getRepeatMax? | getNameInData? |
+| $adminAuthToken | metadataGroup | recordInfoGroup | 1 | 1 | recordInfo |
+| $adminAuthToken | metadataTextVariable | nameInDataTextVar | 1 | 1 | nameInData |
+| $adminAuthToken | metadataRecordLink | textIdLink | 1 | 1 | textId |
+| $adminAuthToken | metadataRecordLink | defTextIdLink | 1 | 1 | defTextId |
+| $adminAuthToken | metadataRecordLink | refParentIdGroupLink | 0 | 1 | refParentId |
+| $adminAuthToken | metadataGroup | attributeReferencesGroup | 0 | 1 | attributeReferences |
+| $adminAuthToken | metadataGroup | childReferencesGroup | 1 | 1 | childReferences |
+| $adminAuthToken | metadataGroup | recordInfoOldGroup | not found | not found | |
+
+*!
+!***> Load metadataGroupNew to use in tests
+
+!| RecordEndpointFixture |
+| type | id | testReadRecordAndStoreJson? |
+| metadataGroup | metadataGroupNewGroup | |
+
+*!
+!***> Check children in metadataGroupNew
+
+!| MetadataLinkFixture |
+| authToken | linkedRecordType | linkedRecordId | getRepeatMin? | getRepeatMax? | getNameInData? |
+| $adminAuthToken | metadataGroup | recordInfoNewGroup | 1 | 1 | recordInfo |
+| $adminAuthToken | metadataTextVariable | nameInDataTextVar | 1 | 1 | nameInData |
+| $adminAuthToken | metadataRecordLink | textIdLink | 0 | 1 | textId |
+| $adminAuthToken | metadataRecordLink | defTextIdLink | 0 | 1 | defTextId |
+| $adminAuthToken | metadataRecordLink | refParentIdGroupLink | 0 | 1 | refParentId |
+| $adminAuthToken | metadataGroup | attributeReferencesGroup | 0 | 1 | attributeReferences |
+| $adminAuthToken | metadataGroup | childReferencesGroup | 1 | 1 | childReferences |
+| $adminAuthToken | metadataGroup | recordInfoOldGroup | not found | not found | not found |
+
+*!
+!***> childReferences and childReference
+
+!| RecordEndpointFixture |
+| type | id | testReadRecord? | getStatusType? |
+| metadataGroup | childReferencesGroup | =~/"value":"childReferenceGroup".*"name":"ref".*"name":"childReference"/ | OK |
+| metadataGroup | childReferenceGroup | =~/"value":"repeatMinTextVar".*"name":"ref".*"value":"repeatMaxTextVar".*"name":"ref".*"value":"refMetadataLink".*"name":"ref".*"value":"childRefCollectIndexTermLink".*"name":"ref".*"value":"childRefCollectPermissionTermLink".*"name":"ref".*"value":"childRefCollectStorageTermLink".*"name":"ref"/ | OK |
+
+*!

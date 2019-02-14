@@ -1,0 +1,118 @@
+ * 
+
+!contents -R2 -g -p -f -h
+| import |
+| se.uu.ub.cora.fitnesseintegration |
+
+!1 !-PresentationRecordLink-!
+A test that first reads all predefined metadata needed to be able to add presentationRecordLinks to the system, and then tests adding and updating presentationRecordLink
+
+!2 Read metadata defined in code to make sure it is correct
+!***> Read collectionItems (pRecordLinkItem)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | genericCollectionItem | pRecordLinkItem | =~/"name":"linkedRecordId","value":"pRecordLinkItemText"/ | OK |
+
+*!
+!***> Read itemCollection (presentationTypeCollection)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | metadataItemCollection | presentationTypeCollection | =~/"name":"linkedRecordId","value":"pVarItem".*"name":"linkedRecordId","value":"containerItem".*"linkedRecordId","value":"pRecordLinkItem".*"name":"linkedRecordId","value":"pCollVarItem".*"name":"linkedRecordId","value":"pResourceLinkItem".*"name":"linkedRecordId","value":"presentationLinkItem".*/ | OK |
+
+*!
+!***> Read collectionVariables (modeCollectionVar, presentationTypeCollectionVar, presentationTypePRecordLinkCollectionVar)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | metadataCollectionVariable | modeCollectionVar | | OK |
+| $adminAuthToken | metadataCollectionVariable | presentationTypeCollectionVar | | OK |
+| $adminAuthToken | metadataCollectionVariable | presentationTypePRecordLinkCollectionVar | | OK |
+
+*!
+!***> Read textVariable (idPRecordLinkTextVar)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | metadataTextVariable | idPRecordLinkTextVar | | OK |
+
+*!
+!***> Read metadataGroups (recordInfoPRecordLinkGroup, recordInfoNewPRecordLinkGroup, presentationRecordLinkNewGroup, presentationRecordLinkGroup)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | metadataGroup | recordInfoPRecordLinkGroup | =~/"name":"linkedRecordId","value":"idPRecordLinkTextVar"/ | OK |
+| $adminAuthToken | metadataGroup | recordInfoNewPRecordLinkGroup | =~/"name":"linkedRecordId","value":"idPRecordLinkTextVar"/ | OK |
+| $adminAuthToken | metadataGroup | presentationRecordLinkNewGroup | =~/"name":"linkedRecordId","value":"recordInfoNewPRecordLinkGroup"/ | OK |
+| $adminAuthToken | metadataGroup | presentationRecordLinkGroup | =~/"name":"linkedRecordId","value":"recordInfoPRecordLinkGroup"/ | OK |
+
+*!
+!***> Read recordType ( presentationRecordLink)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | recordType | presentationRecordLink | =~/"name":"linkedRecordId","value":"presentationRecordLinkGroup".*"name":"metadataId"/ | OK |
+
+*!
+!2 Test with presentationRecordLink
+!***> Create data of recordType presentationRecordLink (myLinkNoPresentationOfLinkedRecordPLink, myPLink)
+
+!| RecordEndpointFixture |
+| authToken | type | json | testCreateRecordCreatedType? | getStatusType? |
+| $adminAuthToken | presentationRecordLink | {"name":"presentation","attributes":{"type":"pRecordLink"},"children":[{"name":"recordInfo","children":[{"name":"id","value":"myLinkNoPresentationOfLinkedRecordPLink"},{"children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}],"name":"dataDivider"}]},{"children":[{"name":"linkedRecordType","value":"metadataRecordLink"},{"name":"linkedRecordId","value":"dataDividerCoraLink"}],"name":"presentationOf"},{"name":"mode","value":"input"}]} | presentationRecordLink | CREATED |
+| $adminAuthToken | presentationRecordLink | {"name":"presentation","attributes":{"type":"pRecordLink"},"children":[{"name":"recordInfo","children":[{"name":"id","value":"myPLink"},{"children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}],"name":"dataDivider"}]},{"children":[{"name":"linkedRecordType","value":"metadataRecordLink"},{"name":"linkedRecordId","value":"dataDividerCoraLink"}],"name":"presentationOf"},{"name":"mode","value":"input"},{"name":"linkedRecordPresentations","children":[{"name":"linkedRecordPresentation","repeatId":"1","children":[{"name":"presentedRecordType","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"image"}]},{"name":"presentation","children":[{"name":"linkedRecordType","value":"presentation"},{"name":"linkedRecordId","value":"imagePGroup"}]}]},{"name":"linkedRecordPresentation","repeatId":"2","children":[{"name":"presentedRecordType","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"sound"}]},{"name":"presentation","children":[{"name":"linkedRecordType","value":"presentation"},{"name":"linkedRecordId","value":"soundPGroup"}]}]}]}]} | presentationRecordLink | CREATED |
+
+*!
+!***> Update data of recordType presentationRecordLink
+
+!| RecordEndpointFixture |
+| authToken | type | id | json | testUpdateRecord? | getStatusType? |
+| $adminAuthToken | presentationRecordLink | myPLink | {"children":[{"children":[{"name":"id","value":"myPLink"},{"children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"presentationRecordLink"}],"name":"type"},{"name":"createdBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"131313"}]},{"name":"tsCreated","value":"2017-10-01 00:00:00.0"},{"children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}],"name":"dataDivider"}],"name":"recordInfo"},{"children":[{"name":"linkedRecordType","value":"metadataRecordLink"},{"name":"linkedRecordId","value":"dataDividerCoraLink"}],"name":"presentationOf"},{"name":"mode","value":"input"},{"name":"linkedRecordPresentations","children":[{"name":"linkedRecordPresentation","repeatId":"1","children":[{"name":"presentedRecordType","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"image"}]},{"name":"presentation","children":[{"name":"linkedRecordType","value":"presentation"},{"name":"linkedRecordId","value":"imageOutputPGroup"}]}]},{"name":"linkedRecordPresentation","repeatId":"2","children":[{"name":"presentedRecordType","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"sound"}]},{"name":"presentation","children":[{"name":"linkedRecordType","value":"presentation"},{"name":"linkedRecordId","value":"soundOutputPGroup"}]}]}]},{"children":[{"name":"linkedRecordType","value":"search"},{"name":"linkedRecordId","value":"textSearch"}],"name":"search"}],"name":"presentation","attributes":{"type":"pRecordLink"}} | | OK |
+
+*!
+!2 List presentation data
+!***> List data(presentation, presentationRecordLink)
+
+!| RecordEndpointFixture |
+| authToken | type | testReadRecordList? | getStatusType? |
+| $adminAuthToken | presentation | | OK |
+| $adminAuthToken | presentationRecordLink | | OK |
+
+*!
+!2 Incorrect data
+!***> Try to create data of recordType text (this should fail as the data is incorrect)
+
+!| RecordEndpointFixture |
+| authToken | type | json | testCreateRecord? | getStatusType? |
+| $adminAuthToken | presentationRecordLink | {"name":"presentation","attributes":{"type":"pRecordLink"},"children":[{"name":"recordInfo","children":[{"name":"id","value":"myPLink"}]},{"name":"presentationOf","value":"myLink"},{"name":"mode","value":"input"},{"name":"linkedRecordPresentations","children":[]}]} | | BAD_REQUEST |
+
+*!
+!2 Data needed by clients
+!***> Read presentationVars
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | presentationVar | linkedRecordTypeOutputPVar | | OK |
+| $adminAuthToken | presentationVar | linkedRecordIdPVar | | OK |
+| $adminAuthToken | presentationVar | linkedRecordIdOutputPVar | | OK |
+| $adminAuthToken | presentationVar | linkedRepeatIdPVar | | OK |
+| $adminAuthToken | presentationVar | linkedRepeatIdOutputPVar | | OK |
+
+*!
+!***> Read texts
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | coraText | linkedRecordTypeTextVarText | | OK |
+
+*!
+!2 Clean up created data
+!***> Clean up created data
+
+!| RecordEndpointFixture |
+| authToken | type | id | testDeleteRecord? | getStatusType? |
+| $adminAuthToken | presentationRecordLink | myPLink | | OK |
+| $adminAuthToken | presentationRecordLink | myLinkNoPresentationOfLinkedRecordPLink | | OK |
+
+*!

@@ -1,0 +1,75 @@
+!contents -R2 -g -p -f -h
+| import |
+| se.uu.ub.cora.fitnesseintegration |
+
+!1 !-AppTokenTest-!
+A test that first reads all predefined metadata needed to be able to add appToken data to the appToken.
+
+!2 Read predefined metadata to make sure it is correct
+!***> Read textVariables (appTokenNameTextVar)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | metadataTextVariable | tokenTextVar | | OK |
+| $adminAuthToken | metadataTextVariable | noteTextVar | | OK |
+
+*!
+!***> Read metadataGroups (recordInfo, appTokenGroup, appTokenNewGroup)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | metadataGroup | recordInfoGroup | | OK |
+| $adminAuthToken | metadataGroup | appTokenGroup | =~/"name":"linkedRecordId","value":"tokenTextVar"/ | OK |
+| $adminAuthToken | metadataGroup | appTokenNewGroup | =~/"name":"linkedRecordId","value":"tokenTextVar"/ | OK |
+
+*!
+!***> Read recordType (appToken)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | recordType | appToken | | OK |
+
+*!
+!2 
+!2 Test with new appToken
+!***> Create data of recordType appToken
+
+!| RecordEndpointFixture |
+| authToken | type | json | testCreateRecordCreatedType? | getStatusType? | getCreatedId? | getToken? |
+| $adminAuthToken | appToken | {"name":"appToken","children":[{"name":"recordInfo","children":[{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}]}]},{"name":"note","value":"My device"}]} | appToken | CREATED | $createdId= | $token= |
+
+*!
+!***> Read data of recordType appToken
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | appToken | $createdId | =~/"name":"id","value":"$createdId"/ | OK |
+
+*!
+!***> Update data of recordType appToken
+
+!| comment |
+| RecordEndpointFixture | !-
+-! |
+| authToken | type | id | json | testUpdateRecord? | getStatusType? |
+| $adminAuthToken | appToken | $createdId | {"name":"appToken","children":[{"name":"recordInfo","children":[{"name":"id","value":"appToken:764139891640"},{"name":"type","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"appToken"}]},{"name":"createdBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"131313"}]},{"name":"tsCreated","value":"2017-10-01 00:00:00.0"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}]}]},{"name":"token","value":"077582c4-fc7a-49c8-9c3f-e7c02868fde6"},{"name":"note","value":"My device"}]} | | FORBIDDEN |
+
+*!
+!2 Reset user fitnesse
+Update user, fitnesse to be as it was before testing
+
+!***> Update user, fitnesse, restoring original state
+
+!| RecordEndpointFixture |
+| authToken | type | id | json | testUpdateRecord? | getStatusType? |
+| $adminAuthToken | systemOneUser | 131313 | {"name":"user","children":[{"name":"recordInfo","children":[{"name":"id","value":"131313"},{"name":"type","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"systemOneUser"}]},{"name":"createdBy","children":[{"name":"linkedRecordType","value":"systemOneUser"},{"name":"linkedRecordId","value":"12345"}]},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"systemOne"}]},{"name":"tsCreated","value":"2017-10-01 00:00:00.0"},{"name":"updated","children":[{"name":"updatedBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"141414"}]},{"name":"tsUpdated","value":"2018-04-11 08:56:43.010"}],"repeatId":"0"},{"name":"updated","children":[{"name":"updatedBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"141414"}]},{"name":"tsUpdated","value":"2018-09-27 09:46:09.781"}],"repeatId":"1"},{"name":"updated","children":[{"name":"updatedBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"141414"}]},{"name":"tsUpdated","value":"2018-09-27 12:47:30.003"}],"repeatId":"2"}]},{"name":"userId","value":"fitnesseAdmin@system.cora.uu.se"},{"name":"userFirstname","value":"Fitnesse"},{"name":"userLastname","value":"Admin"},{"name":"userRole","children":[{"name":"userRole","children":[{"name":"linkedRecordType","value":"permissionRole"},{"name":"linkedRecordId","value":"everything"}]},{"name":"permissionTermRulePart","children":[{"name":"rule","children":[{"name":"linkedRecordType","value":"collectPermissionTerm"},{"name":"linkedRecordId","value":"systemPermissionTerm"}]},{"name":"value","value":"system.*","repeatId":"0"}],"repeatId":"0"}],"repeatId":"1"},{"name":"activeStatus","value":"active"},{"name":"userAppTokenGroup","children":[{"name":"appTokenLink","children":[{"name":"linkedRecordType","value":"appToken"},{"name":"linkedRecordId","value":"appToken:3603190243788"}]},{"name":"note","value":"JsClient"}],"repeatId":"3603423986672"}]} | | OK |
+
+*!
+!2 Clean up created data
+!***> Clean up created data
+
+!| RecordEndpointFixture |
+| authToken | type | id | testDeleteRecord? | getStatusType? |
+| $adminAuthToken | appToken | $createdId | | OK |
+
+*!

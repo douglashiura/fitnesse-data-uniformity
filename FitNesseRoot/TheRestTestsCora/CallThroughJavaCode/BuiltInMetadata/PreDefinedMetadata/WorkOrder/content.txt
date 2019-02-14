@@ -1,0 +1,92 @@
+!***> Read RecordType workOrder
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | recordType | workOrder | =~/"name":"linkedRecordId","value":"workOrderGroup"/ | OK |
+
+*!
+!***> Read metadataGroups (workOrderGroup, workOrderNewGroup)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | metadataGroup | workOrderGroup | =~/"name":"linkedRecordId","value":"workOrderRecordTypeLink".*"name":"linkedRecordId","value":"workOrderRecordIdTextVar".*"name":"linkedRecordId","value":"workOrderTypeCollectionVar"/ | OK |
+| $adminAuthToken | metadataGroup | workOrderNewGroup | =~/"name":"linkedRecordId","value":"workOrderRecordTypeLink".*"name":"linkedRecordId","value":"workOrderRecordIdTextVar".*"name":"linkedRecordId","value":"workOrderTypeCollectionVar"/ | OK |
+
+*!
+!2 Test with new workOrder
+!***> Create text to use as metadata in workOrder
+
+!| RecordEndpointFixture |
+| authToken | type | json | testCreateRecord? | getStatusType? |
+| $adminAuthToken | coraText | {"name":"text","children":[{"name":"recordInfo","children":[{"name":"id","value":"testForWorkOrderText"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}]}]},{"name":"textPart","children":[{"name":"text","value":"Testtext"}],"attributes":{"type":"default","lang":"sv"}},{"name":"textPart","children":[{"name":"text","value":"Test  text"}],"attributes":{"type":"alternative","lang":"en"}}]} | | CREATED |
+
+*!
+!***> Create data of recordType workOrder
+
+!| RecordEndpointFixture |
+| authToken | type | json | testCreateRecord? | getStatusType? | getCreatedId? |
+| $adminAuthToken | workOrder | {"name":"workOrder","children":[{"name":"recordInfo","children":[{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"testSystem"}]}]},{"name":"recordType","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"coraText"}]},{"name":"recordId","value":"testForWorkOrderText"},{"name":"type","value":"index"}]} | | CREATED | $createdId= |
+
+*!
+WorkOrders are deleted after create, since they only are intended to be used to perform a task. Reading and listing workOrders will therefore give no result.
+
+!***> Read workOrder
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | workOrder | $createdId | | NOT_FOUND |
+
+*!
+!***> List recordType workOrder - no result since they are deleted after create
+
+!| RecordEndpointFixture |
+| authToken | type | testReadRecordList? | getStatusType? |
+| $adminAuthToken | workOrder | | NOT_FOUND |
+
+*!
+!***> Create data of recordType workOrder without recordInfo. It is ok, since it is autocreated using extended functionality
+
+!| RecordEndpointFixture |
+| authToken | type | json | testCreateRecord? | getStatusType? | getCreatedId? |
+| $adminAuthToken | workOrder | {"name":"workOrder","children":[{"name":"recordType","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"coraText"}]},{"name":"recordId","value":"testForWorkOrderText"},{"name":"type","value":"index"}]} | | CREATED | $createdId2= |
+
+*!
+!***> Read workOrder
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | workOrder | $createdId2 | | NOT_FOUND |
+
+*!
+!***> Create text with an id containing characters that should be ok in workOrder
+
+!| RecordEndpointFixture |
+| authToken | type | json | testCreateRecord? | getStatusType? |
+| $adminAuthToken | coraText | {"name":"text","children":[{"name":"recordInfo","children":[{"name":"id","value":"an:Id_with-okCharactersText"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}]}]},{"name":"textPart","children":[{"name":"text","value":"Testtext"}],"attributes":{"type":"default","lang":"sv"}},{"name":"textPart","children":[{"name":"text","value":"Test  text"}],"attributes":{"type":"alternative","lang":"en"}}]} | | CREATED |
+
+*!
+!***> Create data of recordType workOrder
+
+!| RecordEndpointFixture |
+| authToken | type | json | testCreateRecord? | getStatusType? | getCreatedId? |
+| $adminAuthToken | workOrder | {"name":"workOrder","children":[{"name":"recordInfo","children":[{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"testSystem"}]}]},{"name":"recordType","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"coraText"}]},{"name":"recordId","value":"an:Id_with-okCharactersText"},{"name":"type","value":"index"}]} | | CREATED | $createdId= |
+
+*!
+!***> Delete created texts
+
+!| RecordEndpointFixture |
+| authToken | type | id | testDeleteRecord? | getStatusType? |
+| $adminAuthToken | coraText | testForWorkOrderText | | OK |
+| $adminAuthToken | coraText | an:Id_with-okCharactersText | | OK |
+
+*!
+!2 Test with incorrect data
+Try create data of recodType workOrder. Shuld fail since type is missing
+
+!***> Create data of recordType workOrder
+
+!| RecordEndpointFixture |
+| authToken | type | json | testCreateRecord? | getStatusType? |
+| $adminAuthToken | workOrder | {"name":"workOrder","children":[{"name":"recordInfo","children":[{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"testSystem"}]}]},{"name":"recordType","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"coraText"}]},{"name":"recordId","value":"testForWorkOrderText"}]} | Data is not valid: [Did not find enough data children with referenceId: workOrderTypeCollectionVar(with nameInData:type.] | BAD_REQUEST |
+
+*!

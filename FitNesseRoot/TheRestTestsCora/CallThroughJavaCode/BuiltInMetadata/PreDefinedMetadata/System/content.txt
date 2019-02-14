@@ -1,0 +1,69 @@
+!contents -R2 -g -p -f -h
+| import |
+| se.uu.ub.cora.fitnesseintegration |
+
+!1 !-SystemTest-!
+A test that first reads all predefined metadata needed to be able to add system data to the system.
+
+!2 Read predefined metadata to make sure it is correct
+!***> Read textVariables (systemNameTextVar)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | metadataTextVariable | systemNameTextVar | | OK |
+
+*!
+!***> Read metadataGroups (recordInfo, systemGroup, systemNewGroup)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | metadataGroup | recordInfoGroup | | OK |
+| $adminAuthToken | metadataGroup | systemGroup | =~/"name":"linkedRecordId","value":"systemNameTextVar".*"name":"linkedRecordId","value":"systemGroupText".*"name":"linkedRecordId","value":"systemGroupDefText"/ | OK |
+| $adminAuthToken | metadataGroup | systemNewGroup | =~/"name":"linkedRecordId","value":"systemNameTextVar".*"name":"linkedRecordId","value":"systemNewGroupText".*"name":"linkedRecordId","value":"systemNewGroupDefText"/ | OK |
+
+*!
+!***> Read recordType (system)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | recordType | system | | OK |
+
+*!
+!***> Read system (cora, jsClient)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | system | cora | =~/"name":"systemName","value":"Cora"/ | OK |
+| $adminAuthToken | system | jsClient | =~/"name":"systemName","value":"jsClient"/ | OK |
+
+*!
+!2 Test with new system
+!***> Create data of recordType system
+
+!| RecordEndpointFixture |
+| authToken | type | json | testCreateRecordCreatedType? | getStatusType? | getCreatedId? |
+| $adminAuthToken | system | {"name":"system","children":[{"name":"recordInfo","children":[{"name":"id","value":"fitnesse"},{"children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}],"name":"dataDivider"}]},{"name":"systemName","value":"cora"}]} | system | CREATED | $createdId= |
+
+*!
+!***> Read system(fitnesse)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | system | fitnesse | =~/"name":"systemName","value":"cora"/ | OK |
+
+*!
+!***> Update data of recordType system
+
+!| RecordEndpointFixture |
+| authToken | type | id | json | testUpdateRecord? | getStatusType? |
+| $adminAuthToken | system | $createdId | {"children":[{"name":"systemName","value":"notCora"},{"children":[{"name":"id","value":"$createdId"},{"children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}],"name":"dataDivider"},{"name":"type","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"system"}]},{"name":"createdBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"131313"}]},{"name":"tsCreated","value":"2017-10-01 00:00:00.0"}],"name":"recordInfo"}],"name":"system"} | =~/"name":"systemName","value":"notCora"/ | OK |
+
+*!
+!2 Clean up created data
+!***> Clean up created data
+
+!| RecordEndpointFixture |
+| authToken | type | id | testDeleteRecord? | getStatusType? |
+| $adminAuthToken | system | fitnesse | | OK |
+
+*!

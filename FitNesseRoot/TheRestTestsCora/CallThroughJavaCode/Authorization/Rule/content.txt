@@ -1,0 +1,236 @@
+!contents -R2 -g -p -f -h
+| import |
+| se.uu.ub.cora.fitnesseintegration |
+
+!1 Testing permissionRule
+The authority system of Cora is built using rules, roles, users.
+
+A rule descibes what is allowed based on rule parts, there are four rule parts:
+
+ * action (create, read, update, delete)
+ * recordType (the type of record)
+ * delete (existing / deleted)
+ * publish (published / notpublished)
+
+Each rule part has a key and 1 or more values. A rule also has a status that can be active or inactive. The values are strings.
+
+The simplest possible rule to give access to everything is:
+
+ * action (system.)
+ * recordType (system.)
+ * delete (system.)
+ * publish (system.)
+
+The user(121212) using token fitnesseUser, has one role (textAdmin), that has two rules (metadataUser, textAdmin)
+
+Reading the permissionRule, textAdmin results in the following:
+
+!***> Read permissionRule, textAdmin
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | permissionRule | textAdmin | | OK |
+
+*!
+To show that changes to rules changes what is allowed, will we use texts as an example:
+
+Create a new text to show that it is allowed:
+
+!***> Create data of recordType text (textSystemOne)
+
+!| RecordEndpointFixture |
+| authToken | type | json | testCreateRecord? | getStatusType? |
+| $userAuthToken | textSystemOne | {"name":"text","children":[{"name":"recordInfo","children":[{"name":"id","value":"myRuleText"},{"children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"testSystem"}],"name":"dataDivider"}]},{"name":"textPart","attributes":{"type":"default","lang":"sv"},"children":[{"name":"text","value":"Min svenska text"}]}]} | | CREATED |
+
+*!
+!2 Rule status
+Update rule, set status to inactive
+
+!***> Update permissionRule, textAdmin, setting status to inactive
+
+!| RecordEndpointFixture |
+| authToken | type | id | json | testUpdateRecord? | getStatusType? |
+| $adminAuthToken | permissionRule | textAdmin | {"name":"permissionRule","children":[{"name":"recordInfo","children":[{"name":"id","value":"textAdmin"},{"name":"type","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"permissionRule"}]},{"name":"createdBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"131313"}]},{"name":"tsCreated","value":"2017-10-01 00:00:00.0"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}]}]},{"name":"permissionRulePart","children":[{"name":"permissionRulePartValue","value":"system.*","repeatId":"0"}],"attributes":{"type":"action"}},{"name":"permissionRulePart","children":[{"name":"permissionRulePartValue","value":"system.text","repeatId":"0"},{"name":"permissionRulePartValue","value":"system.textSystemOne","repeatId":"1"},{"name":"permissionRulePartValue","value":"system.coraText","repeatId":"2"}],"attributes":{"type":"recordType"}},{"name":"activeStatus","value":"inactive"}]} | | OK |
+
+*!
+Create a new text to show that it is '''NOT''' allowed:
+
+!***> Create data of recordType text (textSystemOne)
+
+!| RecordEndpointFixture |
+| authToken | type | json | testCreateRecord? | getStatusType? |
+| $userAuthToken | textSystemOne | {"name":"text","children":[{"name":"recordInfo","children":[{"name":"id","value":"myRuleText"},{"children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"testSystem"}],"name":"dataDivider"}]},{"name":"textPart","attributes":{"type":"default","lang":"sv"},"children":[{"name":"text","value":"Min  svenska text"}]}]} | | FORBIDDEN |
+
+*!
+!2 Rule part action
+Update rule, set action to not allow anything (system.DISABLED)
+
+!***> Update permissionRule, textAdmin,  setting action to system.DISABLED
+
+!| RecordEndpointFixture |
+| authToken | type | id | json | testUpdateRecord? | getStatusType? |
+| $adminAuthToken | permissionRule | textAdmin | {"name":"permissionRule","children":[{"name":"recordInfo","children":[{"name":"id","value":"textAdmin"},{"name":"type","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"permissionRule"}]},{"name":"createdBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"131313"}]},{"name":"tsCreated","value":"2017-10-01 00:00:00.0"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"testSystem"}]}]},{"name":"permissionRulePart","children":[{"name":"permissionRulePartValue","value":"system.DISABLED","repeatId":"0"}],"attributes":{"type":"action"}},{"name":"permissionRulePart","children":[{"name":"permissionRulePartValue","value":"system.*","repeatId":"0"}],"attributes":{"type":"recordType"}},{"name":"activeStatus","value":"active"}]} | | OK |
+
+*!
+!3 Create
+Create a new text to show that it is '''NOT''' allowed:
+
+!***> Create data of recordType text (textSystemOne)
+
+!| RecordEndpointFixture |
+| authToken | type | json | testCreateRecord? | getStatusType? |
+| $userAuthToken | textSystemOne | {"name":"text","children":[{"name":"recordInfo","children":[{"name":"id","value":"myRuleText"},{"children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"testSystem"}],"name":"dataDivider"}]},{"name":"textPart","attributes":{"type":"default","lang":"sv"},"children":[{"name":"text","value":"Min  svenska text"}]}]} | | FORBIDDEN |
+
+*!
+Update rule, set action to allow create (system.create)
+
+!***> Update permissionRule, textAdmin,  setting action to system.create
+
+!| RecordEndpointFixture |
+| authToken | type | id | json | testUpdateRecord? | getStatusType? |
+| $adminAuthToken | permissionRule | textAdmin | {"name":"permissionRule","children":[{"name":"recordInfo","children":[{"name":"id","value":"textAdmin"},{"name":"type","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"permissionRule"}]},{"name":"createdBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"131313"}]},{"name":"tsCreated","value":"2017-10-01 00:00:00.0"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"testSystem"}]}]},{"name":"permissionRulePart","children":[{"name":"permissionRulePartValue","value":"system.create","repeatId":"0"}],"attributes":{"type":"action"}},{"name":"permissionRulePart","children":[{"name":"permissionRulePartValue","value":"system.*","repeatId":"0"}],"attributes":{"type":"recordType"}},{"name":"activeStatus","value":"active"}]} | | OK |
+
+*!
+Create a new text to show that it is '''IS''' allowed:
+
+!***> Create data of recordType text (textSystemOne)
+
+!| RecordEndpointFixture |
+| authToken | type | json | testCreateRecord? | getStatusType? |
+| $userAuthToken | textSystemOne | {"name":"text","children":[{"name":"recordInfo","children":[{"name":"id","value":"myRule2Text"},{"children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"testSystem"}],"name":"dataDivider"}]},{"name":"textPart","attributes":{"type":"default","lang":"sv"},"children":[{"name":"text","value":"Min  svenska text"}]}]} | | CREATED |
+
+*!
+!3 Read
+Try to read created text to see that it is '''NOT''' allowed
+
+!***> Read a textSystemOne (myRuleText)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $userAuthToken | textSystemOne | myRuleText | | FORBIDDEN |
+
+*!
+Update rule, set action to allow create and read (system.create, system.read)
+
+!***> Update permissionRule, textAdmin, setting action to system.create, system.read
+
+!| RecordEndpointFixture |
+| authToken | type | id | json | testUpdateRecord? | getStatusType? |
+| $adminAuthToken | permissionRule | textAdmin | {"name":"permissionRule","children":[{"name":"recordInfo","children":[{"name":"id","value":"textAdmin"},{"name":"type","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"permissionRule"}]},{"name":"createdBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"131313"}]},{"name":"tsCreated","value":"2017-10-01 00:00:00.0"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"testSystem"}]}]},{"name":"permissionRulePart","children":[{"name":"permissionRulePartValue","value":"system.create","repeatId":"0"},{"name":"permissionRulePartValue","value":"system.read","repeatId":"1"}],"attributes":{"type":"action"}},{"name":"permissionRulePart","children":[{"name":"permissionRulePartValue","value":"system.*","repeatId":"0"}],"attributes":{"type":"recordType"}},{"name":"activeStatus","value":"active"}]} | | OK |
+
+*!
+Try to read created text to see that it is '''IS''' allowed
+
+!***> Read a textSystemOne (myRuleText)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $userAuthToken | textSystemOne | myRuleText | | OK |
+
+*!
+!3 Update
+Try to update created text to see that it is '''NOT''' allowed
+
+!***> Update  data of recordType text (textSystemOne)
+
+!| RecordEndpointFixture |
+| authToken | type | id | json | testUpdateRecord? | getStatusType? |
+| $userAuthToken | textSystemOne | myRuleText | {"children":[{"children":[{"name":"id","value":"myRuleText"},{"children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"testSystem"}],"name":"dataDivider"},{"name":"type","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"textSystemOne"}]},{"name":"createdBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"131313"}]},{"name":"tsCreated","value":"2017-10-01 00:00:00.0"}],"name":"recordInfo"},{"children":[{"name":"text","value":"Min svenska text"}],"name":"textPart","attributes":{"type":"default","lang":"sv"}}],"name":"text"} | | FORBIDDEN |
+
+*!
+Update rule, set action to allow create, read and update (system.create, system.read, system.update)
+
+!***> Update permissionRule, textAdmin, setting action to system.create, system.read, system.update
+
+!| RecordEndpointFixture |
+| authToken | type | id | json | testUpdateRecord? | getStatusType? |
+| $adminAuthToken | permissionRule | textAdmin | {"name":"permissionRule","children":[{"name":"recordInfo","children":[{"name":"id","value":"textAdmin"},{"name":"type","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"permissionRule"}]},{"name":"createdBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"131313"}]},{"name":"tsCreated","value":"2017-10-01 00:00:00.0"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"testSystem"}]}]},{"name":"permissionRulePart","children":[{"name":"permissionRulePartValue","value":"system.create","repeatId":"0"},{"name":"permissionRulePartValue","value":"system.read","repeatId":"1"},{"name":"permissionRulePartValue","value":"system.update","repeatId":"2"}],"attributes":{"type":"action"}},{"name":"permissionRulePart","children":[{"name":"permissionRulePartValue","value":"system.*","repeatId":"0"}],"attributes":{"type":"recordType"}},{"name":"activeStatus","value":"active"}]} | | OK |
+
+*!
+Try to update created text to see that it is '''IS''' allowed
+
+!***> Update  data of recordType text (textSystemOne)
+
+!| RecordEndpointFixture |
+| authToken | type | id | json | testUpdateRecord? | getStatusType? |
+| $userAuthToken | textSystemOne | myRuleText | {"children":[{"children":[{"name":"id","value":"myRuleText"},{"children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"testSystem"}],"name":"dataDivider"},{"name":"type","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"textSystemOne"}]},{"name":"createdBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"131313"}]},{"name":"tsCreated","value":"2017-10-01 00:00:00.0"}],"name":"recordInfo"},{"children":[{"name":"text","value":"Min svenska text"}],"name":"textPart","attributes":{"type":"default","lang":"sv"}}],"name":"text"} | | OK |
+
+*!
+!3 Delete
+Try to delete created text to see that it is '''NOT '''allowed
+
+!***> Delete data of recordType text (textSystemOne)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testDeleteRecord? | getStatusType? |
+| $userAuthToken | textSystemOne | myRuleText | | FORBIDDEN |
+
+*!
+Update rule, set action to allow create, read, update and delete (system.create, system.read, system.update, system.delete)
+
+!***> Update permissionRule, textAdmin, setting action to system.create, system.read, system.update, system.delete
+
+!| RecordEndpointFixture |
+| authToken | type | id | json | testUpdateRecord? | getStatusType? |
+| $adminAuthToken | permissionRule | textAdmin | {"name":"permissionRule","children":[{"name":"recordInfo","children":[{"name":"id","value":"textAdmin"},{"name":"type","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"permissionRule"}]},{"name":"createdBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"131313"}]},{"name":"tsCreated","value":"2017-10-01 00:00:00.0"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"testSystem"}]}]},{"name":"permissionRulePart","children":[{"name":"permissionRulePartValue","value":"system.create","repeatId":"0"},{"name":"permissionRulePartValue","value":"system.read","repeatId":"1"},{"name":"permissionRulePartValue","value":"system.update","repeatId":"2"},{"name":"permissionRulePartValue","value":"system.delete","repeatId":"3"}],"attributes":{"type":"action"}},{"name":"permissionRulePart","children":[{"name":"permissionRulePartValue","value":"system.*","repeatId":"0"}],"attributes":{"type":"recordType"}},{"name":"activeStatus","value":"active"}]} | | OK |
+
+*!
+Try to delete created text to see that it is '''is '''allowed
+
+!***> Delete data of recordType text (textSystemOne)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testDeleteRecord? | getStatusType? |
+| $userAuthToken | textSystemOne | myRuleText | | OK |
+
+*!
+!2 Rule part recordType
+Update rule, set recordType to only allow book (system.book)
+
+!***> Update permissionRule, textAdmin, setting recordType to system.book
+
+!| RecordEndpointFixture |
+| authToken | type | id | json | testUpdateRecord? | getStatusType? |
+| $adminAuthToken | permissionRule | textAdmin | {"name":"permissionRule","children":[{"name":"recordInfo","children":[{"name":"id","value":"textAdmin"},{"name":"type","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"permissionRule"}]},{"name":"createdBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"131313"}]},{"name":"tsCreated","value":"2017-10-01 00:00:00.0"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"testSystem"}]}]},{"name":"permissionRulePart","children":[{"name":"permissionRulePartValue","value":"system.*","repeatId":"0"}],"attributes":{"type":"action"}},{"name":"permissionRulePart","children":[{"name":"permissionRulePartValue","value":"system.book","repeatId":"0"}],"attributes":{"type":"recordType"}},{"name":"activeStatus","value":"active"}]} | | OK |
+
+*!
+Create a new text to show that it is '''NOT''' allowed:
+
+!***> Create data of recordType text (textSystemOne)
+
+!| RecordEndpointFixture |
+| authToken | type | json | testCreateRecord? | getStatusType? |
+| $userAuthToken | textSystemOne | {"name":"text","children":[{"name":"recordInfo","children":[{"name":"id","value":"myRuleText"},{"children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"testSystem"}],"name":"dataDivider"}]},{"name":"textPart","attributes":{"type":"default","lang":"sv"},"children":[{"name":"text","value":"Min  svenska text"}]}]} | | FORBIDDEN |
+
+*!
+Reset rule as before test
+
+Update rule, to allow everything
+
+!***> Update permissionRule, textAdmin, to allow everything
+
+!| RecordEndpointFixture |
+| authToken | type | id | json | testUpdateRecord? | getStatusType? |
+| $adminAuthToken | permissionRule | textAdmin | {"name":"permissionRule","children":[{"name":"recordInfo","children":[{"name":"id","value":"textAdmin"},{"name":"type","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"permissionRule"}]},{"name":"createdBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"131313"}]},{"name":"tsCreated","value":"2017-10-01 00:00:00.0"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}]}]},{"name":"permissionRulePart","children":[{"name":"permissionRulePartValue","value":"system.*","repeatId":"0"}],"attributes":{"type":"action"}},{"name":"permissionRulePart","children":[{"name":"permissionRulePartValue","value":"system.*","repeatId":"0"}],"attributes":{"type":"recordType"}},{"name":"activeStatus","value":"active"}]} | | OK |
+
+*!
+!2 Delete and publish are not yet added to the rule system.
+needs to be developed
+
+!2 Clean up created data
+!***> Clean up created texts
+
+!| RecordEndpointFixture |
+| authToken | type | id | testDeleteRecord? | getStatusType? |
+| $userAuthToken | textSystemOne | myRule2Text | | OK |
+
+*!
+Update rule, to allow everything
+
+!***> Update permissionRule, as before test
+
+!| RecordEndpointFixture |
+| authToken | type | id | json | testUpdateRecord? | getStatusType? |
+| $adminAuthToken | permissionRule | textAdmin | {"name":"permissionRule","children":[{"name":"recordInfo","children":[{"name":"id","value":"textAdmin"},{"name":"type","children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"permissionRule"}]},{"name":"createdBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"131313"}]},{"name":"tsCreated","value":"2017-10-01 00:00:00.0"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}]}]},{"name":"permissionRulePart","children":[{"name":"permissionRulePartValue","value":"system.*","repeatId":"0"}],"attributes":{"type":"action"}},{"name":"permissionRulePart","children":[{"name":"permissionRulePartValue","value":"system.text","repeatId":"0"},{"name":"permissionRulePartValue","value":"system.textSystemOne","repeatId":"1"},{"name":"permissionRulePartValue","value":"system.coraText","repeatId":"2"}],"attributes":{"type":"recordType"}},{"name":"activeStatus","value":"active"}]} | | OK |
+
+*!

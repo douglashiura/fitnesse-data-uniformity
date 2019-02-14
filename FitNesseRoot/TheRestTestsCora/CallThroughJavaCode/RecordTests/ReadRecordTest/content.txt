@@ -1,0 +1,32 @@
+!contents -R2 -g -p -f -h
+| import |
+| se.uu.ub.cora.fitnesseintegration |
+
+!***> Read a metadataVariable (idTextVar)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | metadataTextVariable | idTextVar | | OK |
+
+*!
+!***> List data(metadataTextVariable)
+
+!| RecordEndpointFixture |
+| authToken | type | testReadRecordList? | getStatusType? |
+| $adminAuthToken | metadataTextVariable | | OK |
+
+*!
+!***> Read a metadataVariable2, which doesn't exist (id)
+
+!| RecordEndpointFixture |
+| authToken | id | type | testReadRecord? | getStatusType? |
+| $adminAuthToken | id | metadataTextVariable2 | No record exists with recordId: metadataTextVariable2 | NOT_FOUND |
+
+*!
+!***> List data(metadataTextVariable2), which doesn't exist
+
+!| RecordEndpointFixture |
+| authToken | type | testReadRecordList? | getStatusType? |
+| $adminAuthToken | metadataTextVariable2 | | NOT_FOUND |
+
+*!

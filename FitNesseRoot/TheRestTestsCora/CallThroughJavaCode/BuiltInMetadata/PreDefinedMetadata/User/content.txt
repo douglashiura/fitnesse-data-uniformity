@@ -1,0 +1,74 @@
+!contents -R2 -g -p -f -h
+| import |
+| se.uu.ub.cora.fitnesseintegration |
+
+!1 !-UserTest-!
+A test that  reads all predefined metadata needed to be able to create a concrete recordType user
+
+!2 Read predefined metadata to make sure it is correct
+!***> Load userNewGroup to use in tests
+
+!| RecordEndpointFixture |
+| type | id | testReadRecordAndStoreJson? |
+| metadataGroup | userNewGroup | |
+
+*!
+!***> Check children in userNewGroup
+
+!| MetadataLinkFixture |
+| linkedRecordType | linkedRecordId | getRepeatMin? | getRepeatMax? |
+| metadataTextVariable | userIdTextVar | 1 | 1 |
+| metadataTextVariable | userFirstnameTextVar | 1 | 1 |
+| metadataTextVariable | userLastnameTextVar | 1 | 1 |
+| metadataGroup | userRoleRelationGroup | 1 | X |
+| metadataCollectionVariable | activeStatusCollectionVar | 1 | 1 |
+
+*!
+!***> Load userGroup to use in tests
+
+!| RecordEndpointFixture |
+| type | id | testReadRecordAndStoreJson? |
+| metadataGroup | userGroup | |
+
+*!
+!***> Check children in userGroup
+
+!| MetadataLinkFixture |
+| linkedRecordType | linkedRecordId | getRepeatMin? | getRepeatMax? |
+| metadataTextVariable | userIdTextVar | 1 | 1 |
+| metadataTextVariable | userFirstnameTextVar | 1 | 1 |
+| metadataTextVariable | userLastnameTextVar | 1 | 1 |
+| metadataGroup | userRoleRelationGroup | 1 | X |
+| metadataCollectionVariable | activeStatusCollectionVar | 1 | 1 |
+
+*!
+!***> Load userRoleRelationGroup to use in tests
+
+!| RecordEndpointFixture |
+| type | id | testReadRecordAndStoreJson? |
+| metadataGroup | userRoleRelationGroup | |
+
+*!
+!***> Check children in userRoleRelationGroup
+
+!| MetadataLinkFixture |
+| linkedRecordType | linkedRecordId | getRepeatMin? | getRepeatMax? |
+| metadataRecordLink | userRoleLink | 1 | 1 |
+| metadataGroup | permissionTermRulePartGroup | 0 | X |
+
+*!
+!***> Read recordType (user)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | recordType | user | | OK |
+
+*!
+!2 Test with new user
+!***> Create data of recordType user. Should fail since it is abstract
+
+!| RecordEndpointFixture |
+| authToken | type | id | json | testCreateRecord? | getStatusType? |
+| $adminAuthToken | user | fitnessUser | {"name":"systemOneUserNewGroup","children":[{"name":"recordInfo","children":[{"name":"id","value":"fitnessUser"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}]}]},{"name":"userId","value":"user123"},{"name":"userFirstname","value":"Some"},{"name":"userLastname","value":"User"},{"name":"userRole","value":"","repeatId":"0"}]} | | METHOD_NOT_ALLOWED |
+
+*!

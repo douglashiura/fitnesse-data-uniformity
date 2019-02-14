@@ -1,0 +1,31 @@
+| import |
+| se.uu.ub.cora.fitnesseintegration |
+
+!| script | SystemUrl |
+| setUrl | ${systemUnderTestUrl} |
+| setAppTokenVerifierUrl | ${appTokenVerifierUrl} |
+
+!| script | DependencyProvider |
+| setHttpHandlerFactoryClassName | se.uu.ub.cora.httphandler.HttpHandlerFactoryImp |
+| setJsonToDataFactoryClassName | se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactoryImp |
+
+!2 Login
+!***> Login for admin
+
+!| AppTokenEndpointFixture |
+| userId | appToken | getAuthTokenForAppToken? | getAuthToken? | getStatusType? |
+| 131313 | | | $adminAuthToken= | CREATED |
+
+*!
+!| script | AuthTokenHolder |
+| setAdminAuthToken | $adminAuthToken |
+
+!***> Login for user
+
+!| AppTokenEndpointFixture |
+| userId | appToken | getAuthTokenForAppToken? | getAuthToken? | getStatusType? |
+| 121212 | | | $userAuthToken= | CREATED |
+
+*!
+!| script | AuthTokenHolder |
+| setUserAuthToken | $userAuthToken |

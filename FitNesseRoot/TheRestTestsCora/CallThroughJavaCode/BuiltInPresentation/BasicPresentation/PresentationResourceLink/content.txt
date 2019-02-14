@@ -1,0 +1,126 @@
+!contents -R2 -g -p -f -h
+| import |
+| se.uu.ub.cora.fitnesseintegration |
+
+!1 !-PresentationResourceLink-!
+A test that first reads all predefined metadata needed to be able to add presentationResourceLinks to the system, and then tests adding and updating presentationResourceLink
+
+!2 Read metadata defined in code to make sure it is correct
+!***> Read collectionItems (pResourceLinkItem)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | genericCollectionItem | pResourceLinkItem | =~/"name":"linkedRecordId","value":"pResourceLinkItemText"/ | OK |
+
+*!
+!***> Read itemCollection (presentationTypeCollection)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | metadataItemCollection | presentationTypeCollection | =~/"name":"linkedRecordId","value":"pVarItem".*"name":"linkedRecordId","value":"containerItem".*"linkedRecordId","value":"pRecordLinkItem".*"name":"linkedRecordId","value":"pCollVarItem".*"name":"linkedRecordId","value":"pResourceLinkItem".*"name":"linkedRecordId","value":"presentationLinkItem".*/ | OK |
+
+*!
+!***> Read collectionVariables (modeCollectionVar, presentationTypeCollectionVar, presentationTypePResourceLinkCollectionVar)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | metadataCollectionVariable | outputFormatCollectionVar | | OK |
+| $adminAuthToken | metadataCollectionVariable | presentationTypeCollectionVar | | OK |
+| $adminAuthToken | metadataCollectionVariable | presentationTypePResourceLinkCollectionVar | | OK |
+
+*!
+!***> Read textVariable (idPResourceLinkTextVar)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | metadataTextVariable | idPResourceLinkTextVar | | OK |
+
+*!
+!***> Read metadataGroups (recordInfoPResourceLinkGroup, recordInfoNewPResourceLinkGroup, presentationResourceLinkNewGroup, presentationResourceLinkGroup)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | metadataGroup | recordInfoPResourceLinkGroup | =~/"name":"linkedRecordId","value":"idPResourceLinkTextVar"/ | OK |
+| $adminAuthToken | metadataGroup | recordInfoNewPResourceLinkGroup | | OK |
+| $adminAuthToken | metadataGroup | presentationResourceLinkNewGroup | =~/"name":"linkedRecordId","value":"recordInfoNewPResourceLinkGroup"/ | OK |
+| $adminAuthToken | metadataGroup | presentationResourceLinkGroup | | OK |
+
+*!
+!***> Read recordType ( presentationResourceLink)
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | recordType | presentationResourceLink | | OK |
+
+*!
+!2 Test with presentationResourceLink
+!***> Create data of recordType presentationResourceLink (withOutputPResLink, withChildReferencesPResLink, withOutputAndChildReferencesPResLink)
+
+!| RecordEndpointFixture |
+| authToken | type | json | testCreateRecordCreatedType? | getStatusType? |
+| $adminAuthToken | presentationResourceLink | {"name":"presentation","children":[{"name":"recordInfo","children":[{"name":"id","value":"withOutputPResLink"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}]}]},{"name":"presentationOf","children":[{"name":"linkedRecordType","value":"metadataResourceLink"},{"name":"linkedRecordId","value":"masterResLink"}]},{"name":"outputFormat","value":"image"}],"attributes":{"type":"pResourceLink"}} | presentationResourceLink | CREATED |
+| $adminAuthToken | presentationResourceLink | {"name":"presentation","children":[{"name":"recordInfo","children":[{"name":"id","value":"withChildReferencesPResLink"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}]}]},{"name":"presentationOf","children":[{"name":"linkedRecordType","value":"metadataResourceLink"},{"name":"linkedRecordId","value":"masterResLink"}]},{"name":"childReferences","children":[{"name":"childReference","children":[{"repeatId":"0","children":[{"children":[{"name":"linkedRecordId","value":"filesizeTextVarOutputPVar"},{"name":"linkedRecordType","value":"presentation"}],"name":"ref","attributes":{"type":"presentation"}}],"name":"refGroup"}],"repeatId":"0"}]}],"attributes":{"type":"pResourceLink"}} | presentationResourceLink | CREATED |
+| $adminAuthToken | presentationResourceLink | {"name":"presentation","children":[{"name":"recordInfo","children":[{"name":"id","value":"withOutputAndChildReferencesPResLink"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}]}]},{"name":"presentationOf","children":[{"name":"linkedRecordType","value":"metadataResourceLink"},{"name":"linkedRecordId","value":"masterResLink"}]},{"name":"childReferences","children":[{"name":"childReference","children":[{"repeatId":"0","children":[{"children":[{"name":"linkedRecordId","value":"filesizeTextVarOutputPVar"},{"name":"linkedRecordType","value":"presentation"}],"name":"ref","attributes":{"type":"presentation"}}],"name":"refGroup"}],"repeatId":"0"}]},{"name":"outputFormat","value":"image"}],"attributes":{"type":"pResourceLink"}} | presentationResourceLink | CREATED |
+
+*!
+!***> Update data of recordType presentationResourceLink (withOutputPResLink, withChildReferencesPResLink, withOutputAndChildReferencesPResLink)
+
+!| RecordEndpointFixture |
+| authToken | type | id | json | testUpdateRecord? | getStatusType? |
+| $adminAuthToken | presentationResourceLink | withOutputPResLink | {"name":"presentation","children":[{"name":"recordInfo","children":[{"name":"id","value":"withOutputPResLink"},{"children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"presentationResourceLink"}],"name":"type"},{"name":"createdBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"131313"}]},{"name":"tsCreated","value":"2017-10-01 00:00:00.0"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}]}]},{"name":"presentationOf","children":[{"name":"linkedRecordType","value":"metadataResourceLink"},{"name":"linkedRecordId","value":"masterResLink"}]},{"name":"outputFormat","value":"download"}],"attributes":{"type":"pResourceLink"}} | | OK |
+| $adminAuthToken | presentationResourceLink | withChildReferencesPResLink | {"name":"presentation","children":[{"name":"recordInfo","children":[{"name":"id","value":"withChildReferencesPResLink"},{"children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"presentationResourceLink"}],"name":"type"},{"name":"createdBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"131313"}]},{"name":"tsCreated","value":"2017-10-01 00:00:00.0"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}]}]},{"name":"presentationOf","children":[{"name":"linkedRecordType","value":"metadataResourceLink"},{"name":"linkedRecordId","value":"masterResLink"}]},{"name":"childReferences","children":[{"name":"childReference","children":[{"repeatId":"0","children":[{"children":[{"name":"linkedRecordId","value":"filenameTextVarOutputPVar"},{"name":"linkedRecordType","value":"presentation"}],"name":"ref","attributes":{"type":"presentation"}}],"name":"refGroup"}],"repeatId":"0"}]}],"attributes":{"type":"pResourceLink"}} | | OK |
+| $adminAuthToken | presentationResourceLink | withOutputAndChildReferencesPResLink | {"name":"presentation","children":[{"name":"recordInfo","children":[{"name":"id","value":"withOutputAndChildReferencesPResLink"},{"children":[{"name":"linkedRecordType","value":"recordType"},{"name":"linkedRecordId","value":"presentationResourceLink"}],"name":"type"},{"name":"createdBy","children":[{"name":"linkedRecordType","value":"user"},{"name":"linkedRecordId","value":"131313"}]},{"name":"tsCreated","value":"2017-10-01 00:00:00.0"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}]}]},{"name":"presentationOf","children":[{"name":"linkedRecordType","value":"metadataResourceLink"},{"name":"linkedRecordId","value":"masterResLink"}]},{"name":"childReferences","children":[{"name":"childReference","children":[{"repeatId":"0","children":[{"children":[{"name":"linkedRecordId","value":"filenameTextVarOutputPVar"},{"name":"linkedRecordType","value":"presentation"}],"name":"ref","attributes":{"type":"presentation"}}],"name":"refGroup"}],"repeatId":"0"}]},{"name":"outputFormat","value":"download"}],"attributes":{"type":"pResourceLink"}} | | OK |
+
+*!
+!2 List presentation data
+!***> List data(presentation, presentationResourceLink)
+
+!| RecordEndpointFixture |
+| authToken | type | testReadRecordList? | getStatusType? |
+| $adminAuthToken | presentation | | OK |
+| $adminAuthToken | presentationResourceLink | | OK |
+
+*!
+!2 Incorrect data
+!***> Try to create data of recordType presentationResourceLink (brokenTwoOutputFormatPResLink),(this should fail as the data is incorrect)
+
+!| RecordEndpointFixture |
+| authToken | type | json | testCreateRecord? | getStatusType? |
+| $adminAuthToken | presentationResourceLink | {"name":"presentation","children":[{"name":"recordInfo","children":[{"name":"id","value":"brokenTwoOutputFormatPResLink"},{"name":"dataDivider","children":[{"name":"linkedRecordType","value":"system"},{"name":"linkedRecordId","value":"cora"}]}]},{"name":"presentationOf","children":[{"name":"linkedRecordType","value":"metadataResourceLink"},{"name":"linkedRecordId","value":"masterResLink"}]},{"name":"childReferences","children":[{"name":"childReference","children":[{"name":"ref","value":"filesizeTextVarOutputPVar"},{"name":"default","value":"ref"}],"repeatId":"0"}]},{"name":"outputFormat","value":"image"},{"name":"outputFormat","value":"download"}],"attributes":{"type":"pResourceLink"}} | | BAD_REQUEST |
+
+*!
+!2 Data needed by clients
+!***> Read presentationVars
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | presentationVar | streamIdTextVarOutputPVar | | OK |
+| $adminAuthToken | presentationVar | filenameTextVarOutputPVar | | OK |
+| $adminAuthToken | presentationVar | filesizeTextVarOutputPVar | | OK |
+| $adminAuthToken | presentationVar | mimeTypeTextVarOutputPVar | | OK |
+
+*!
+!***> Read texts
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | coraText | streamIdTextVarText | | OK |
+| $adminAuthToken | coraText | streamIdTextVarDefText | | OK |
+| $adminAuthToken | coraText | filenameTextVarText | | OK |
+| $adminAuthToken | coraText | filenameTextVarDefText | | OK |
+| $adminAuthToken | coraText | filesizeTextVarText | | OK |
+| $adminAuthToken | coraText | filesizeTextVarDefText | | OK |
+| $adminAuthToken | coraText | mimeTypeTextVarText | | OK |
+| $adminAuthToken | coraText | mimeTypeTextVarDefText | | OK |
+
+*!
+!2 Clean up created data
+!***> Clean up created data
+
+!| RecordEndpointFixture |
+| authToken | type | id | testDeleteRecord? | getStatusType? |
+| $adminAuthToken | presentationResourceLink | withOutputAndChildReferencesPResLink | | OK |
+| $adminAuthToken | presentationResourceLink | withChildReferencesPResLink | | OK |
+| $adminAuthToken | presentationResourceLink | withOutputPResLink | | OK |
+
+*!
