@@ -1,0 +1,29 @@
+---
+Test
+---
+<test page>
+
+'''História de Usuário: '''
+Eu como cliente de um banco
+Quero retirar dinheiro da minha conta corrente
+Então realizo um saque utilizando um ATM
+
+''Dados do cliente:''
+
+!| br.ufsc.fit.fixtures.WithDrawnSetUpFixtureTest |
+| id | usuario | conta corrente | saldo | numero do cartao | senha | Numero de notas de 5, 10, 20, 50 e 100, disponiveis no caixa eletronico, separados por virgula |
+| 1 | J.F. Piper | 125654-08 | 90.00 | 99998888777766665555 | 123456 | 0,200,0,150,100 |
+
+'''Cenário de Aceitação:'''
+''O saque não é realizado, pois o usuário informou uma senha inválida.
+É a primeira vez que o usuário informa uma senha inválida nas últimas 72 horas''
+
+!| ActionFixture |
+| start | br.ufsc.fit.fixtures.WithDrawActionFixtureTest |
+| enter | numero do cartao | 99998888777766665555 |
+| enter | valor para sacar | 30 |
+| press | OK |
+| check | o valor e valido | true |
+| enter | senha | 123457 |
+| check | Confirmar | Senha inválida! |
+| check | Saldo atual | 90.00 |
