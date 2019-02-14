@@ -1,0 +1,16 @@
+---
+Test
+---
+!contents -R2 -g -p -f -h
+!1 Testing reading an organisation
+It should be possible to read an organisation from the REST API.
+
+!***> Read organisation:1 as Json
+
+authority-person:11685 is a minimal person
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | divaOrganisation | 1 | | OK |
+
+*!

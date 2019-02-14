@@ -1,0 +1,36 @@
+| import |
+| se.uu.ub.cora.fitnesseintegration |
+| se.uu.ub.diva.cora.fitnesse |
+
+!| script | SystemUrl |
+| setUrl | ${systemUnderTestUrl} |
+| setAppTokenVerifierUrl | ${appTokenVerifierUrl} |
+
+!| script | DependencyProvider |
+| setHttpHandlerFactoryClassName | se.uu.ub.cora.httphandler.HttpHandlerFactoryImp |
+| setJsonToDataFactoryClassName | se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactoryImp |
+
+
+!| script | DivaFitnesseDependencyProvider |
+| setConverterFactoryClassName | se.uu.ub.cora.diva.tocorastorage.fedora.DivaToCoraConverterFactoryImp |
+
+!2 Login
+!***> Login for admin
+
+!| AppTokenEndpointFixture |
+| userId | appToken | getAuthTokenForAppToken? | getAuthToken? | getStatusType? |
+| 131313 | | | $adminAuthToken= | CREATED |
+
+*!
+!| script | AuthTokenHolder |
+| setAdminAuthToken | $adminAuthToken |
+
+!***> Login for user
+
+!| AppTokenEndpointFixture |
+| userId | appToken | getAuthTokenForAppToken? | getAuthToken? | getStatusType? |
+| 121212 | | | $userAuthToken= | CREATED |
+
+*!
+!| script | AuthTokenHolder |
+| setUserAuthToken | $userAuthToken |

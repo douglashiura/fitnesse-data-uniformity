@@ -1,0 +1,17 @@
+---
+Help: Reading a person
+Test
+---
+!contents -R2 -g -p -f -h
+!1 Testing reading a place
+It should be possible to read a place from the REST API.
+
+!***> Read authority-person:11685 as Json
+
+authority-person:11685 is a minimal person
+
+!| RecordEndpointFixture |
+| authToken | type | id | testReadRecord? | getStatusType? |
+| $adminAuthToken | person | authority-person:11685 | | OK |
+
+*!
