@@ -28,7 +28,7 @@ public class Main {
 		SuiteResponder suit = new SuiteResponder();
 		FitNesseContext context = ContextConfigurator.systemDefaults().makeFitNesseContext();
 		Request request = new Request(new ByteArrayInputStream("".getBytes()));
-		request.setResource(".cob_spec");
+		request.setResource(".OnlineLottery");
 		suit.makeResponse(context, request);
 		List<WikiPage> pages = suit.getPagesToRun();
 		PagesByTestSystem pagesByTestSystem = new PagesByTestSystem(pages, context.getRootPage());
@@ -38,6 +38,18 @@ public class Main {
 		runner.executeTestPages();
 
 		List<FitnesseScenario> scenaries = listener.getScenaries();
+		List<FitnesseScenario> scenaries2 = new ArrayList<>();
+		for (FitnesseScenario fitnesseScenario : scenaries) {
+			if (fitnesseScenario.getScenario().getInputs().size()
+					+ fitnesseScenario.getScenario().getOutputs().size() > 0) {
+				scenaries2.add(fitnesseScenario);
+			}
+		}
+		scenaries = scenaries2;
+//		 System.out.printf("%s %s %s\n", "Test","Inputs","Outputs");
+//		for (FitnesseScenario fitnesseScenario : scenaries) {
+//			System.out.printf("%s	%s	%s\n", fitnesseScenario.getFullPath(),fitnesseScenario.getScenario().getInputs().size(),fitnesseScenario.getScenario().getOutputs().size());
+//		}
 		List<Pair> pairs = Pairs.from(scenaries);
 		FileOutputStream fileOutputStream = new FileOutputStream("qualquer");
 		for (Pair pair : pairs) {
